@@ -91,8 +91,8 @@ with col2:
     cp = st.number_input("Masukkan nilai cp:", value=1)
     tr = 1
 
-# Input lamanya waktu Hidrograf
-time_to_compute = st.number_input("Masukkan Lamanya waktu Hidrograf:", value=50) 
+    # Input lamanya waktu Hidrograf
+    time_to_compute = st.number_input("Masukkan Lamanya waktu Hidrograf:", value=50) 
 # # Menyediakan pilihan input untuk metode infiltrasi
 # Metode_infiltrasi = st.radio('Pilih Metode Infiltrasi:', ['SCS-CN', 'Horton'])
 
