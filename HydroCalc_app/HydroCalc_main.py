@@ -161,7 +161,9 @@ if st.button('Analisis Infiltrasi dan HSS'):
     st.subheader('Hasil Analisis Infiltrasi')
     #st.write(dfreffkum)
     #st.bokeh_chart(fig)
+    st.write('Tabel Hasil Analisis Infiltrasi Jam-Jaman')
     st.write(dfreff)
+    st.write('Grafik Infiltrasi Jam-jaman')
     st.bokeh_chart(fig2)
 
     #if st.button('Analisis HSS'):
