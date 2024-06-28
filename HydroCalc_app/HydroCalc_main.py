@@ -3,14 +3,14 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from bokeh.plotting import figure, show
-from HidrocalcMod import (coef_dist_hujan,
-                          infiltrasi_CN, infiltrasi_Horton, 
-                          calculate_Q_and_V,
-                          Qp_SCS,Qp_Snyder,HSS_ITB_1,HSS_ITB_2)
-# from Cal_Q_and_V import calculate_Q_and_V
-# from dist_hujan import coef_dist_hujan
-# from infiltrasi_calc import infiltrasi_CN, infiltrasi_Horton
-# from Unit_Hydrograph import Qp_SCS,Qp_Snyder,HSS_ITB_1,HSS_ITB_2
+# from HidrocalcMod import (coef_dist_hujan,
+#                           infiltrasi_CN, infiltrasi_Horton, 
+#                           calculate_Q_and_V,
+#                           Qp_SCS,Qp_Snyder,HSS_ITB_1,HSS_ITB_2)
+from Cal_Q_and_V import calculate_Q_and_V
+from dist_hujan import coef_dist_hujan
+from infiltrasi_calc import infiltrasi_CN, infiltrasi_Horton
+from Unit_Hydrograph import Qp_SCS,Qp_Snyder,HSS_ITB_1,HSS_ITB_2
 
 
 #Tabel Input
