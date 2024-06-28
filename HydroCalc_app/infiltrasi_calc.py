@@ -64,8 +64,8 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
     
     #reff_jam = reff
     infiltrasi_jam = (Iab_jam+infil)
-    reff_jam = Pjam_ARF - infiltrasi_jam
     infiltrasi_jam = infiltrasi_jam-(infiltrasi_jam*Im/100)
+    reff_jam = Pjam_ARF - infiltrasi_jam
     infiltrasi_kum = np.cumsum(infiltrasi_jam)  
     reff_kum = np.cumsum(reff_jam)
     
