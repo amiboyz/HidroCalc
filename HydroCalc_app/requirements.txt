@@ -3,7 +3,4 @@ numpy==1.26.4
 pandas==2.2.2
 streamlit==1.34.0
 matplotlib
-Cal_Q_and_V
-dist_hujan
-infiltrasi_calc
-Unit_Hydrograph
+pyplot
