@@ -3,4 +3,3 @@ numpy==1.26.4
 pandas==2.2.2
 streamlit==1.34.0
 matplotlib
-pyplot
