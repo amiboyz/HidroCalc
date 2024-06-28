@@ -3,7 +3,7 @@ import pandas as pd
 from bokeh.plotting import figure, show, output_notebook
 from bokeh.models import Legend
 
-output_notebook()
+#output_notebook()
 # Fungsi untuk menghitung limpasan berdasarkan metode CN
 def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
     coef_dist = dist_jam[:int(jumlah_data_hujan)]
