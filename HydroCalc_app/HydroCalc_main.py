@@ -48,7 +48,7 @@ with col1:
 
     # Input untuk parameter-parameter berdasarkan pilihan metode infiltrasi
     if Metode_infiltrasi == 'SCS-CN':
-        CN = st.number_input('Masukkan CN:', min_value=0, max_value=100, value=78.39, step=1)
+        CN = st.number_input('Masukkan CN:', min_value=0, max_value=100, value=78, step=1)
         Im = st.number_input('Masukkan Im (%):', min_value=0.0, value=7.42, step=0.1)
     elif Metode_infiltrasi == 'Horton':
         k = st.number_input('Masukkan k (mm/jam):', min_value=0.0, value=1.0, step=0.1)
