@@ -154,7 +154,7 @@ with col2:
 if st.button('Analisis Infiltrasi dan HSS'):
     T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
     if Metode_infiltrasi == "SCS-CN":
-        Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2, Iab= infiltrasi_CN(P, ARF, CN, Im, jumlah_jam_hujan, distribusi, T)
+        Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2= infiltrasi_CN(P, ARF, CN, Im, jumlah_jam_hujan, distribusi, T)
     elif Metode_infiltrasi == "Horton":
         Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2= infiltrasi_Horton(P, ARF, k, f0, fc, jumlah_jam_hujan, distribusi, T)
     # Menampilkan hasil analisis
