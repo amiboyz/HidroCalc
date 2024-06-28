@@ -27,7 +27,7 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
         for i in range(len(Pjam_ARF)):  # membuat nilai i sejumlah hujan jam-jaman yang diberikan
             Ptot += Pjam_ARF[i] / 25.4  # Hujan total baru adalah hujan total sebelumnya di tambah hujan pada jam i (diubah dari mm ke inch)
             Pkum.append(Ptot)  # Menyimpan hujan kumulatif ke dalam array Pkum
-        reff = []  # membua t array hujan efektif
+        reff = []  # membua tarray hujan efektif
         infil = []  # membuat array infiltrasi
         Iab = []  # membuat array Inital Abstraction
         reffkumseb = 0  # memberikan nilai hujan efektif sebelumnya
@@ -141,7 +141,7 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
     print("Tabel Hujan Efektif Jam-jaman (Metode SCS-CN)")
     print(dfreff)
     show(fig2)
-    return  absis, Pjam, Pjam_ARF, infiltrasi_jam, reff_jam, dfreffkum, dfreff, fig, fig2, Iab
+    return  absis, Pjam, Pjam_ARF, infiltrasi_jam, reff_jam, dfreffkum, dfreff, fig, fig2
 
 def infiltrasi_Horton(P, ARF, k, f0, fc, jumlah_data_hujan, dist_jam, T):
     coef_dist = dist_jam[:int(jumlah_data_hujan)]
