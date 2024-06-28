@@ -48,8 +48,8 @@ with col1:
 
     # Input untuk parameter-parameter berdasarkan pilihan metode infiltrasi
     if Metode_infiltrasi == 'SCS-CN':
-        CN = st.number_input('Masukkan CN:', min_value=0, max_value=100, value=98, step=1)
-        Im = st.number_input('Masukkan Im (mm):', min_value=0.0, value=5.0, step=0.1)
+        CN = st.number_input('Masukkan CN:', min_value=0, max_value=100, value=78.39, step=1)
+        Im = st.number_input('Masukkan Im (%):', min_value=0.0, value=7.42, step=0.1)
     elif Metode_infiltrasi == 'Horton':
         k = st.number_input('Masukkan k (mm/jam):', min_value=0.0, value=1.0, step=0.1)
         f0 = st.number_input('Masukkan f0 (%):', min_value=0, max_value=100, value=50, step=1) / 100
@@ -85,7 +85,7 @@ with col2:
     L = st.number_input("Masukkan Panjang Sungai (m):", value=28763)  # panjang main stream [m]
     st.write('Nilai Lc = 0.5 x L')
     Lc = 0.5 * L 
-    S = st.number_input("Masukkan Nilai Slope Das (m/m):", value=0.006)  # slope
+    S = st.number_input("Masukkan Nilai Slope Das (m/m):", value=0.04794)  # slope
     A = st.number_input("Masukkan Luas DAS (km2):", value=52.297)  # Luas DTA [km2]
     ct = st.number_input("Masukkan nilai ct:", value=1)
     cp = st.number_input("Masukkan nilai cp:", value=1)
@@ -154,13 +154,15 @@ with col2:
 if st.button('Analisis Infiltrasi dan HSS'):
     T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
     if Metode_infiltrasi == "SCS-CN":
-        Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2= infiltrasi_CN(P, ARF, CN, Im, jumlah_jam_hujan, distribusi, T)
+        Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2, Iab= infiltrasi_CN(P, ARF, CN, Im, jumlah_jam_hujan, distribusi, T)
     elif Metode_infiltrasi == "Horton":
         Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2= infiltrasi_Horton(P, ARF, k, f0, fc, jumlah_jam_hujan, distribusi, T)
     # Menampilkan hasil analisis
     st.subheader('Hasil Analisis Infiltrasi')
     #st.write(dfreffkum)
     #st.bokeh_chart(fig)
+    Initial_abstraction = np.max(Iab)
+    st.write('Nilai Initial Abstraction adalah', Initial_abstraction,' mm')
     st.write('Tabel Hasil Analisis Infiltrasi Jam-Jaman')
     st.write(dfreff)
     st.write('Grafik Infiltrasi Jam-jaman')

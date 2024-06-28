@@ -52,7 +52,7 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
         return (reff, infil, Iab)  # Menyimpan fungsi hujan efektif dan infiltrasi
 
     reff, infil, Iab = (limpCN(CN, P))  # Memanggil fungsi limpasan CN
-
+    
     #Hujan Efektif Jam-jaman 
     
     #infiltrasi_jam = infil
@@ -141,7 +141,7 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
     print("Tabel Hujan Efektif Jam-jaman (Metode SCS-CN)")
     print(dfreff)
     show(fig2)
-    return  absis, Pjam, Pjam_ARF, infiltrasi_jam, reff_jam, dfreffkum, dfreff, fig, fig2
+    return  absis, Pjam, Pjam_ARF, infiltrasi_jam, reff_jam, dfreffkum, dfreff, fig, fig2, Iab
 
 def infiltrasi_Horton(P, ARF, k, f0, fc, jumlah_data_hujan, dist_jam, T):
     coef_dist = dist_jam[:int(jumlah_data_hujan)]
