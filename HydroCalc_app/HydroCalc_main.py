@@ -34,13 +34,13 @@ st.write('- **ITB-2**: Metode ini juga merupakan metode hidrograf sintesis yang 
 
 st.write('Untuk informasi lebih lanjut, silakan hubungi: [miftahhazmi@gmail.com](mailto:miftahhazmi@gmail.com)')
 
-st.subheader('Input Parameter Untuk Hujan Efektif', divider='blue')
+#st.subheader('Input Parameter Untuk Hujan Efektif', divider='blue')
 
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader('Input Parameter untuk Hujan Efektif')
+    st.subheader('Input Parameter untuk Hujan Efektif', divider='blue')
     P = st.number_input("Masukkan Hujan Rencana (mm):", value=132.9)
     ARF = st.number_input("Masukkan Area Reduction Factor (ARF):", value=0.97)
 # Menyediakan pilihan input untuk metode infiltrasi
@@ -81,7 +81,7 @@ with col1:
 
     jumlah_data_hujan = jumlah_jam_hujan / delta_jam_hujan
 with col2:
-    st.subheader('Input Parameter HSS')
+    st.subheader('Input Parameter HSS', divider='green')
     L = st.number_input("Masukkan Panjang Sungai (m):", value=28763)  # panjang main stream [m]
     st.write('Nilai Lc = 0.5 x L')
     Lc = 0.5 * L 
