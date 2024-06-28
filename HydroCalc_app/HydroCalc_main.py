@@ -79,7 +79,7 @@ tr =1
 time_to_compute = st.number_input("Masukkan Lamanya waktu Hidrograph:", value=50)
 
 # Tombol untuk memulai analisis
-if st.button('Analisis Infiltrasi'):
+if st.button('Analisis Infiltrasi dan HSS'):
     T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
     if Metode_infiltrasi == "SCS-CN":
         Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2= infiltrasi_CN(P, ARF, CN, Im, jumlah_jam_hujan, distribusi, T)
