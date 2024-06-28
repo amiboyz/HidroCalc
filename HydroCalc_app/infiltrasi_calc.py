@@ -19,8 +19,7 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
 
     def limpCN(CN, P):  # membuat fungsi dengan nilai CN dan Hujan
         '''P dalam mm, limp dalam mm'''
-        CN_adj = CN+(100-CN)*(Im/100)
-        S = 1000 / CN_adj - 10  # persamaan hubungan storage dengan nilai CN
+        S = 1000 / CN - 10  # persamaan hubungan storage dengan nilai CN
         k = 0.2  # where K is varied between 0-0.26 (springer et al.), K=0.2 is recommended by SCS
         Pkum = []  # membuat array hujan kumulatif
         Ptot = 0  # mendefinisikan hujan total =0
@@ -64,7 +63,8 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
     #Hujan Efektif Jam-jaman 
     
     reff_jam = reff
-    infiltrasi_jam = Iab_jam+infil
+    infiltrasi_jam = (Iab_jam+infil)
+    infiltrasi_jam = infiltrasi_jam-(infiltrasi_jam*Im/100)
     infiltrasi_kum = np.cumsum(infiltrasi_jam)  
     reff_kum = np.cumsum(reff_jam)
     
