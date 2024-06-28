@@ -56,7 +56,7 @@ with col1:
         fc = st.number_input('Masukkan fc (mm):', min_value=0.0, value=5.0, step=0.1)
 
     # Input lainnya
-    input_method_dis = st.radio('Pilih Metode Distribusi:', ['PSA-007', 'ITB'])
+    input_method_dis = st.radio('Pilih Metode Distribusi Hujan Jam-Jaman:', ['PSA-007', 'ITB'])
 
     if input_method_dis == 'ITB':
         delta_jam_hujan = st.radio('Pilih Hujan Jam-Jaman (Jam):', ['1', '1/2', '1/3', '1/4', '1/6'])
