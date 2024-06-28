@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from bokeh.plotting import figure, show
+from bokeh.plotting import figure, show#, output_notebook
 # from HidrocalcMod import (coef_dist_hujan,
 #                           infiltrasi_CN, infiltrasi_Horton, 
 #                           calculate_Q_and_V,
@@ -14,7 +14,7 @@ from Unit_Hydrograph import Qp_SCS,Qp_Snyder,HSS_ITB_1,HSS_ITB_2
 
 
 #Tabel Input
-
+#output_notebook()
 # Fungsi untuk menjalankan analisis distribusi hujan dan infiltrasi berdasarkan metode yang dipilih
 
 # Mengatur judul dan deskripsi aplikasi
@@ -41,8 +41,8 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.subheader('Input Parameter untuk Hujan Efektif', divider='blue')
-    P = st.number_input("Masukkan Hujan Rencana (mm):", value=132.9)
-    ARF = st.number_input("Masukkan Area Reduction Factor (ARF):", value=0.97)
+    P = st.number_input("Masukkan Hujan Rencana (mm):", value=132.9, format="%.3f")
+    ARF = st.number_input("Masukkan Area Reduction Factor (ARF):", value=0.97, format="%.3f")
 # Menyediakan pilihan input untuk metode infiltrasi
     Metode_infiltrasi = st.radio('Pilih Metode Infiltrasi:', ['SCS-CN', 'Horton'])
 
@@ -82,10 +82,10 @@ with col1:
     jumlah_data_hujan = jumlah_jam_hujan / delta_jam_hujan
 with col2:
     st.subheader('Input Parameter HSS', divider='green')
-    L = st.number_input("Masukkan Panjang Sungai (m):", value=28763)  # panjang main stream [m]
-    Lc = st.number_input("Masukkan Panjang Sungai Centroid (m):", value=17165.4) #0.5 * L 
-    S = st.number_input("Masukkan Nilai Slope Das (m/m):", value=0.04794)  # slope
-    A = st.number_input("Masukkan Luas DAS (km2):", value=52.297)  # Luas DTA [km2]
+    L = st.number_input("Masukkan Panjang Sungai (km):", value=28.763, format="%.3f")*1000  # panjang main stream [km]
+    Lc = st.number_input("Masukkan Panjang Sungai Centroid (km):", value=17.165, format="%.3f")*1000 #0.5 * L 
+    S = st.number_input("Masukkan Nilai Slope Sungai (m/m):", value=0.04794, format="%.6f")  # slope
+    A = st.number_input("Masukkan Luas DAS (km2):", value=52.297, format="%.3f")  # Luas DTA [km2]
     ct = st.number_input("Masukkan nilai ct:", value=1)
     cp = st.number_input("Masukkan nilai cp:", value=1)
     tr = 1
@@ -153,9 +153,9 @@ with col2:
 if st.button('Analisis Infiltrasi dan HSS'):
     T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
     if Metode_infiltrasi == "SCS-CN":
-        Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2, Iab= infiltrasi_CN(P, ARF, CN, Im, jumlah_jam_hujan, distribusi, T)
+        Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2, Iab= infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, distribusi, T)
     elif Metode_infiltrasi == "Horton":
-        Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2= infiltrasi_Horton(P, ARF, k, f0, fc, jumlah_jam_hujan, distribusi, T)
+        Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2= infiltrasi_Horton(P, ARF, k, f0, fc, jumlah_data_hujan, distribusi, T)
     # Menampilkan hasil analisis
     st.subheader('Hasil Analisis Infiltrasi')
     #st.write(dfreffkum)
@@ -254,6 +254,7 @@ if st.button('Analisis Infiltrasi dan HSS'):
     # Membuat Tabel Time Peak dan Q peak
     Table_Tp_Qp = pd.DataFrame({
         'Time Peak (Jam)': [tp1, tp2, tp3, tp4],
+        'Time Peak (Menit)': [tp1*60, tp2*60, tp3*60, tp4*60],
         'Q Peak (m3/s / mm)': [qp1, qp2, qp3, qp4]}, 
         index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
 
@@ -321,27 +322,27 @@ if st.button('Analisis Infiltrasi dan HSS'):
     plt.figure(figsize=(12, 6))
 
     fig, ax1 = plt.subplots(figsize=(12, 6))
-
+    fsiz=20
     # Membuat HSS
     ax1.plot(T1, Qtot1[:len(T1)], marker='o', label='SCS')
     ax1.plot(T2, Qtot2[:len(T2)], marker='o', label='Snyder')
     ax1.plot(T3, Qtot3[:len(T3)], marker='o', label='ITB-1')
     ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
-    ax1.set_xlabel('T (Jam)')
-    ax1.set_ylabel('Qtot (m3/det)')
-    ax1.set_title('Hubungan antara T dan Q serta p')
+    ax1.set_xlabel('T (Jam)',fontsize=fsiz)
+    ax1.set_ylabel('Q (m3/det)',fontsize=fsiz)
+    ax1.set_title('Hidrogaf Sintetik', fontsize=fsiz)
 
     # Membuat bar hujan efektif
     ax2 = ax1.twinx()
     ax2.bar(T1, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
-    ax2.set_ylabel('Hujan Efektif(mm)')
+    ax2.set_ylabel('Hujan Efektif(mm)', fontsize=fsiz)
     ax2.set_ylim(0, 200)
     ax2.invert_yaxis()  # Membalikkan arah y-axis
     # Membuat bar infiltrasi
 
     ax3 = ax1.twinx()
     ax3.bar(T1, Infiltrasi_bar, alpha=0.3, label='Infiltrasi (mm)', color='r')
-    ax3.set_ylabel('Hujan Efektif(mm)')
+    ax3.set_ylabel('Hujan Efektif(mm)', fontsize=fsiz)
     ax3.set_ylim(0, 200)
     ax3.invert_yaxis() 
 
@@ -362,6 +363,11 @@ if st.button('Analisis Infiltrasi dan HSS'):
         'Q Peak (m3/s)': [Q_peak1, Q_peak2, Q_peak3, Q_peak4]}, 
         index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
     print(Table_Tp_Qp_p)
+
+    Table_T_V_p = pd.DataFrame({
+    'Time Peak (jam)': [t_peak_V1, t_peak_V1, t_peak_V1, t_peak_V1],
+    'Vtotal (m3)': [V_total1, V_total2, V_total3, V_total4]}, 
+    index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
 
     # Plot hubungan antara T dan Vtot
     fig, ax1 = plt.subplots(figsize=(12, 6))
@@ -424,6 +430,8 @@ if st.button('Analisis Infiltrasi dan HSS'):
     st.pyplot(fig1)
     st.write('Tabel Nilai T peak dan Q peak')
     st.write(Table_Tp_Qp_p)
+    st.write('Tabel T peak dan V peak')
+    st.write(Table_T_V_p)
     #st.pyplot(fig2)
     st.write('Tabel Hidrograf Sintetik')
     st.write(df_Q_T)    
