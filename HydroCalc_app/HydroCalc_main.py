@@ -83,8 +83,7 @@ with col1:
 with col2:
     st.subheader('Input Parameter HSS', divider='green')
     L = st.number_input("Masukkan Panjang Sungai (m):", value=28763)  # panjang main stream [m]
-    st.write('Nilai Lc = 0.5 x L')
-    Lc = 0.5 * L 
+    Lc = st.number_input("Masukkan Panjang Sungai Centroid (m):", value=17165.4) #0.5 * L 
     S = st.number_input("Masukkan Nilai Slope Das (m/m):", value=0.04794)  # slope
     A = st.number_input("Masukkan Luas DAS (km2):", value=52.297)  # Luas DTA [km2]
     ct = st.number_input("Masukkan nilai ct:", value=1)
