@@ -18,7 +18,22 @@ from Unit_Hydrograph import Qp_SCS,Qp_Snyder,HSS_ITB_1,HSS_ITB_2
 # Fungsi untuk menjalankan analisis distribusi hujan dan infiltrasi berdasarkan metode yang dipilih
 
 # Mengatur judul dan deskripsi aplikasi
-st.title('Analisis Hidrologi Hujan Efektif dan HSS dengan Module HydroCalc')
+st.title('Analisis Hujan Efektif dan Hidrograf Satuan Sintesis (HSS) dengan Modul HydroCalc')
+
+st.write('Selamat datang di aplikasi berbasis web untuk perhitungan infiltrasi dan hidrograf satuan sintesis (HSS) menggunakan metode distribusi hujan PSA-007 dan ITB. Aplikasi ini menyediakan berbagai alat untuk membantu Anda dalam menganalisis hujan efektif dan menghasilkan hidrograf satuan sintesis.')
+
+st.write('### Metode Infiltrasi yang Tersedia:')
+st.write('- **SCS-CN**: Metode ini menggunakan parameter Curah Hujan Rencana dan Kurva Angka (Curve Number) untuk menghitung infiltrasi.')
+st.write('- **Horton**: Metode ini menggunakan parameter laju infiltrasi awal (f0), laju infiltrasi akhir (fc), dan koefisien penurunan (k) untuk menghitung infiltrasi.')
+
+st.write('### Metode Hidrograf Satuan Sintesis (HSS) yang Tersedia:')
+st.write('- **SCS**: Metode ini didasarkan pada unit hidrograf SCS yang dikembangkan oleh Soil Conservation Service.')
+st.write('- **Snyder**: Metode ini menggunakan parameter karakteristik DAS untuk menghasilkan unit hidrograf.')
+st.write('- **ITB-1**: Metode ini merupakan salah satu metode hidrograf sintesis yang dikembangkan oleh ITB.')
+st.write('- **ITB-2**: Metode ini juga merupakan metode hidrograf sintesis yang dikembangkan oleh ITB dengan pendekatan yang berbeda.')
+
+st.write('Untuk informasi lebih lanjut, silakan hubungi: [miftahhazmi@gmail.com](mailto:miftahhazmi@gmail.com)')
+
 st.subheader('Input Parameter Untuk Hujan Efektif', divider='blue')
 
 # Menyediakan pilihan input untuk metode infiltrasi
