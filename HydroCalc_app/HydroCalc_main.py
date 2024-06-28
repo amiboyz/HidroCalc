@@ -418,6 +418,6 @@ if st.button('Analisis Infiltrasi dan HSS'):
     st.write(df_Q_T_int)
     st.pyplot(fig1)
     st.write(Table_Tp_Qp_p)
-    st.pyplot(fig2)
+    #st.pyplot(fig2)
     st.write(df_Q_T)    
     #st.pyplot(p)
