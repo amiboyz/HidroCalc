@@ -160,8 +160,9 @@ if st.button('Analisis Infiltrasi dan HSS'):
     st.subheader('Hasil Analisis Infiltrasi')
     #st.write(dfreffkum)
     #st.bokeh_chart(fig)
-    Initial_abstraction = np.max(np.round(Iab,3))
-    st.write('Nilai Initial Abstraction adalah', Initial_abstraction,' mm')
+    if Metode_infiltrasi == "SCS-CN":
+        Initial_abstraction = np.max(np.round(Iab,3))
+        st.write('Nilai Initial Abstraction adalah', Initial_abstraction,' mm')        
     st.write('Tabel Hasil Analisis Infiltrasi Jam-Jaman')
     st.write(dfreff)
     st.write('Grafik Infiltrasi Jam-jaman')
