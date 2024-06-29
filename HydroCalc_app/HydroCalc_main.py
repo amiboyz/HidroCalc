@@ -205,7 +205,7 @@ with st.form(key="User_Form"):
             update_df = pd.concat([existing_data, user_data], ignore_index=True)
 
             # Update Google Sheets with the user data
-            conn.update(worksheet="Data_User_v1", data=update_df)
+            conn.update(worksheet="Data", data=update_df)
             st.success("Pengisian Berhasil")
 # if st.button('Analisis Infiltrasi dan HSS'):
         T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
