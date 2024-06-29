@@ -160,7 +160,7 @@ if st.button('Analisis Infiltrasi dan HSS'):
     st.subheader('Hasil Analisis Infiltrasi')
     #st.write(dfreffkum)
     #st.bokeh_chart(fig)
-    Initial_abstraction = np.max(Iab)
+    Initial_abstraction = np.max(np.round(Iab,3))
     st.write('Nilai Initial Abstraction adalah', Initial_abstraction,' mm')
     st.write('Tabel Hasil Analisis Infiltrasi Jam-Jaman')
     st.write(dfreff)
@@ -277,7 +277,7 @@ if st.button('Analisis Infiltrasi dan HSS'):
     print(df_Q_T_int)
 
     # Create a new plot with a title and axis labels
-    p = figure(title="Interpolated Data", x_axis_label='Time (Jam ke-)', y_axis_label='Flow (m3/s / mm)')
+    p = figure(title="HSS Interpolasi", x_axis_label='T (Jam ke-)', y_axis_label='Q (m3/s / mm)')
 
     # Add lines for each dataset
     line1 = p.line(ti, qi1, legend_label='SCS', line_width=2, color='blue')
@@ -290,6 +290,20 @@ if st.button('Analisis Infiltrasi dan HSS'):
     p.legend.location = 'top_right'
     p.legend.click_policy = 'hide'
     p_hss=p
+
+    # Ubah ukuran label sumbu dan tick axis
+    p.xaxis.axis_label_text_font_size = "14pt"
+    p.yaxis.axis_label_text_font_size = "14pt"
+    p.xaxis.major_label_text_font_size = "12pt"
+    p.yaxis.major_label_text_font_size = "12pt"
+    
+    # Ubah ukuran title
+    p.title.text_font_size = "15pt"
+    p.title.align = "center"
+
+    # Ubah ukuran teks di legend
+    p.legend.label_text_font_size = "12pt"
+
     # Show the plot
     show(p)
 
@@ -299,8 +313,8 @@ if st.button('Analisis Infiltrasi dan HSS'):
 
 
     # Fungsi untuk menghitung Q dan V
-    def calculate_Q_and_V_wrapper(p, time_step_hours, Q_qp, time_to_compute):
-        return calculate_Q_and_V(p, time_step_hours, Q_qp, time_to_compute)
+    #def calculate_Q_and_V_wrapper(p, time_step_hours, Q_qp, time_to_compute):
+    #    return calculate_Q_and_V(p, time_step_hours, Q_qp, time_to_compute)
 
     # Data input
     p = Hujan_Efektif
@@ -322,39 +336,52 @@ if st.button('Analisis Infiltrasi dan HSS'):
     plt.figure(figsize=(12, 6))
 
     fig, ax1 = plt.subplots(figsize=(12, 6))
-    fsiz=20
+    fsiz = 20
+
     # Membuat HSS
     ax1.plot(T1, Qtot1[:len(T1)], marker='o', label='SCS')
     ax1.plot(T2, Qtot2[:len(T2)], marker='o', label='Snyder')
     ax1.plot(T3, Qtot3[:len(T3)], marker='o', label='ITB-1')
     ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
-    ax1.set_xlabel('T (Jam)',fontsize=fsiz)
-    ax1.set_ylabel('Q (m3/det)',fontsize=fsiz)
+    ax1.set_xlabel('T (Jam)', fontsize=fsiz)
+    ax1.set_ylabel('Q (m³/det)', fontsize=fsiz)
     ax1.set_title('Hidrogaf Sintetik', fontsize=fsiz)
+
+    # Memperbesar ukuran tick pada sumbu x dan y
+    ax1.tick_params(axis='both', which='major', labelsize=fsiz)
+    ax1.tick_params(axis='both', which='minor', labelsize=fsiz)
 
     # Membuat bar hujan efektif
     ax2 = ax1.twinx()
     ax2.bar(T1, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
-    ax2.set_ylabel('Hujan Efektif(mm)', fontsize=fsiz)
+    ax2.set_ylabel('Hujan Efektif / Infiltrasi (mm)', fontsize=fsiz)
     ax2.set_ylim(0, 200)
-    ax2.invert_yaxis()  # Membalikkan arah y-axis
-    # Membuat bar infiltrasi
+    ax2.invert_yaxis()
 
+    # Memperbesar ukuran tick pada sumbu y dari ax2
+    ax2.tick_params(axis='y', which='major', labelsize=fsiz)
+    ax2.tick_params(axis='y', which='minor', labelsize=fsiz)
+
+    # Membuat bar infiltrasi
     ax3 = ax1.twinx()
     ax3.bar(T1, Infiltrasi_bar, alpha=0.3, label='Infiltrasi (mm)', color='r')
-    ax3.set_ylabel('Hujan Efektif(mm)', fontsize=fsiz)
+    #ax3.set_ylabel('Infiltrasi (mm)', fontsize=fsiz)
     ax3.set_ylim(0, 200)
-    ax3.invert_yaxis() 
+    ax3.invert_yaxis()
 
-    #fig.legend(loc='upper right')
+    # Memperbesar ukuran tick pada sumbu y dari ax3
+    ax3.tick_params(axis='y', which='major', labelsize=fsiz)
+    ax3.tick_params(axis='y', which='minor', labelsize=fsiz)
+
     # Menyatukan legend dari semua sumbu
     lines, labels = ax1.get_legend_handles_labels()
     lines2, labels2 = ax2.get_legend_handles_labels()
     lines3, labels3 = ax3.get_legend_handles_labels()
     ax1.legend(lines + lines2 + lines3, labels + labels2 + labels3, loc='upper right')
+
     plt.grid(True)
     plt.show()
-    fig1=fig
+    fig1 = fig
     
 
     # Tabel Time Peak dan Q Peak

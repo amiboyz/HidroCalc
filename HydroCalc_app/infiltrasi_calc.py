@@ -110,7 +110,19 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
 
     # Set axis labels and title
     fig.xaxis.axis_label = 'Jam Ke-'
-    fig.yaxis.axis_label = 'Curah Hujan (mm)'
+    fig.yaxis.axis_label = 'Hujan Efektif / Infiltrasi (mm)'
+
+    # Ubah ukuran label sumbu dan tick axis
+    fig.xaxis.axis_label_text_font_size = "14pt"
+    fig.yaxis.axis_label_text_font_size = "14pt"
+    fig.xaxis.major_label_text_font_size = "12pt"
+    fig.yaxis.major_label_text_font_size = "12pt"
+    
+    # Ubah ukuran title
+    fig.title.text_font_size = "11pt"
+
+    # Ubah ukuran teks di legend
+    fig.legend.label_text_font_size = "12pt"
 
     # Second plot
     fig2 = figure(width=600, height=400, title="Grafik Hujan Jam-Jaman dengan P = {} mm/hari (Metode SCS-CN)".format(np.round(np.sum(P) / ARF, 3)))
@@ -126,13 +138,28 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
 
     # Set axis labels and title
     fig2.xaxis.axis_label = 'Jam ke-'
-    fig2.yaxis.axis_label = 'Curah Hujan (mm)'
+    fig2.yaxis.axis_label = 'Hujan Efektif / Infiltrasi (mm)'
 
+    # Ubah ukuran label sumbu dan tick axis
+    fig2.xaxis.axis_label_text_font_size = "14pt"
+    fig2.yaxis.axis_label_text_font_size = "14pt"
+    fig2.xaxis.major_label_text_font_size = "12pt"
+    fig2.yaxis.major_label_text_font_size = "12pt"
+    
+    # Ubah ukuran title
+    fig2.title.text_font_size = "11pt"
+    fig2.title.align = "center"
+
+    # Ubah ukuran teks di legend
+    fig2.legend.label_text_font_size = "12pt"
+    
     # Adding legends
     fig.legend.location = "top_left"
     fig.legend.click_policy = "hide"
     fig2.legend.location = "top_left"
     fig2.legend.click_policy = "hide" 
+    
+    
 
     # Tampilkan tabel dan graph reffkumtab
     print("Tabel Hujan Efektif Kumulatif (Metode SCS-CN)")
