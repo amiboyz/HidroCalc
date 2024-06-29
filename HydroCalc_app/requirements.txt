@@ -1,7 +1,7 @@
 bokeh==2.4.3
 numpy==1.26.4
 pandas
-streamlit
+streamlit>=1.22.0
 matplotlib
-st-gsheets-connection==0.0.4
-git+https://github.com/streamlit/gsheets-connection
+st-gsheets-connection
+#git+https://github.com/streamlit/gsheets-connection
