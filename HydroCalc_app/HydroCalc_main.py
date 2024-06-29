@@ -178,10 +178,11 @@ jam_akses = datetime.now().time()
 
 # Mark Mandatory field
 st.markdown("**required*")
-submit_button = st.form_submit_button(label="Kalkulasi Infiltrasi dan HSS")
+#submit_button = st.form_submit_button(label="Kalkulasi Infiltrasi dan HSS")
 
 # if the submit button is press
-if submit_button:
+if st.button('Analisis Infiltrasi dan HSS'):
+#if submit_button:
     # Cek if all mandatory field are filled
     if not nama_user or not jenis_profesi:
         st.warning("Pastikan Nama dan Profesi anda terisi")
@@ -205,7 +206,7 @@ if submit_button:
         # # Update Google Sheets with the user data
         # conn.update(worksheet="Data", data=update_df)
         st.success("Pengisian Berhasil")
-#if st.button('Analisis Infiltrasi dan HSS'):    
+        #if st.button('Analisis Infiltrasi dan HSS'):    
         T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
         if Metode_infiltrasi == "SCS-CN":
             Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2, Iab= infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, distribusi, T)
