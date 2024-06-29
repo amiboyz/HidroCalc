@@ -443,8 +443,8 @@ if st.button('Analisis Infiltrasi dan HSS'):
     df_Q_T = pd.DataFrame(data)
 
     # Menampilkan tabel
-    print('Tabel Nilai T dan Q setiap metode')
-    print(df_Q_T)
+    #print('Tabel Nilai T dan Q setiap metode')
+    #print(df_Q_T)
     # Menampilkan hasil Analisis di Streamlit
     st.subheader('Hasil Analisis HSS')
     #st.write(dfreffkum)
