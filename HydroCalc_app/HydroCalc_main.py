@@ -332,7 +332,7 @@ if submit_button:
         print(Table_Tp_Qp)
 
         print('Tabel Nilai T dan Q setiap metode HSS yang telah Interpolasi per delta t')
-        print(df_Q_T_int)
+        #print(df_Q_T_int)
 
         # Create a new plot with a title and axis labels
         p = figure(title="HSS Interpolasi", x_axis_label='T (Jam ke-)', y_axis_label='Q (m3/s / mm)')
