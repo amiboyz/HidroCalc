@@ -153,11 +153,11 @@ with col2:
 st.markdown("Masukan informasi pengguna di bawah ini untuk menjalankan kalkulasi")
 
 #Establishing a google Sheets connection
-conn = st.experimental_connection("gsheets", type=GSheetsConnection)
+#conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 
 #Fetch existing vendor data
-existing_data = conn.read(worksheet="Data", usecols=list(range(4)), ttl=5)
-existing_data = existing_data.dropna(how="all")
+#existing_data = conn.read(worksheet="Data", usecols=list(range(4)), ttl=5)
+#existing_data = existing_data.dropna(how="all")
 
 # st.dataframe(existing_data)
 # List of profession
@@ -188,22 +188,22 @@ with st.form(key="User_Form"):
             st.stop()
         else:
             # Create a new row of user
-            user_data = pd.DataFrame(
-                [
-                        {
-                            "Nama_User": nama_user,
-                            "Profesi": jenis_profesi,
-                            "Tanggal_Akses": tanggal_akses,
-                            "Jam_Akses": jam_akses
-                        }
-                ]
-            )
+            # user_data = pd.DataFrame(
+            #     [
+            #             {
+            #                 "Nama_User": nama_user,
+            #                 "Profesi": jenis_profesi,
+            #                 "Tanggal_Akses": tanggal_akses,
+            #                 "Jam_Akses": jam_akses
+            #             }
+            #     ]
+            # )
 
-            # Add the new user name to the existing data
-            update_df = pd.concat([existing_data, user_data], ignore_index=True)
+            # # Add the new user name to the existing data
+            # update_df = pd.concat([existing_data, user_data], ignore_index=True)
 
-            # Update Google Sheets with the user data
-            conn.update(worksheet="Data", data=update_df)
+            # # Update Google Sheets with the user data
+            # conn.update(worksheet="Data", data=update_df)
             st.success("Pengisian Berhasil")
 #if st.button('Analisis Infiltrasi dan HSS'):    
             T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
