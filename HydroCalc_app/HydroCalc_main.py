@@ -153,7 +153,7 @@ with col2:
 st.markdown("Masukan informasi pengguna di bawah ini untuk menjalankan kalkulasi")
 
 #Establishing a google Sheets connection
-conn = st.connection("gsheets", type=GSheetsConnection)
+conn = st.experimental_connection("gsheets", type=GSheetsConnection)
 
 #Fetch existing vendor data
 existing_data = conn.read(worksheet="Data", usecols=list(range(4)), ttl=5)
