@@ -523,7 +523,7 @@ if submit_button:
 
 
         #Fetch existing vendor data
-        existing_data_masukan = conn.read(worksheet="Masukan", usecols=list(range(4)), ttl=5)
+        existing_data_masukan = conn.read(worksheet="Masukan", usecols=list(range(5)), ttl=5)
         existing_data_masukan = existing_data_masukan.dropna(how="all")
 
         # st.dataframe(existing_data)
