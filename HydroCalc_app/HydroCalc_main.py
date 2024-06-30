@@ -522,19 +522,15 @@ if submit_button:
         st.write(df_Q_T)
 
 
-        #Fetch existing vendor data
-        existing_data_masukan = conn.read(worksheet="Masukan", usecols=list(range(5)), ttl=5)
-        existing_data_masukan = existing_data_masukan.dropna(how="all")
-
         # st.dataframe(existing_data)
         # List of profession
         
         # Membuat Form baru
         with st.form(key="User_Form"):
-            nama_user = nama_user
-            jenis_profesi = jenis_profesi
-            tanggal_akses = datetime.now()
-            jam_akses = datetime.now().time()
+            # nama_user = nama_user
+            # jenis_profesi = jenis_profesi
+            # tanggal_akses = datetime.now()
+            # jam_akses = datetime.now().time()
             masukan = st.text_area(label="Mohon Masukan dan Saran pada Aplikasi ini")
 
             submit_button = st.form_submit_button(label="Kirim Masukan dan Saran")
@@ -550,18 +546,18 @@ if submit_button:
                     user_data = pd.DataFrame(
                         [
                                 {
-                                    "Nama_User": nama_user,
-                                    "Profesi": jenis_profesi,
-                                    "Tanggal_Akses": tanggal_akses,
-                                    "Jam_Akses": jam_akses,
+                                    # "Nama_User": nama_user,
+                                    # "Profesi": jenis_profesi,
+                                    # "Tanggal_Akses": tanggal_akses,
+                                    # "Jam_Akses": jam_akses,
                                     "Masukan": masukan
                                 }
                         ]
                     )
 
                     # Add the new user name to the existing data
-                    update_df = pd.concat([existing_data_masukan, user_data], ignore_index=True)
+                    update_df = pd.concat([existing_data, user_data], ignore_index=True)
 
                     # Update Google Sheets with the user data
-                    conn.update(worksheet="Masukan", data=update_df)
+                    conn.update(worksheet="Data", data=update_df)
                     st.success("Pengisian Masukan dan Saran Berhasil")
