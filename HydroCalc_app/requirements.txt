@@ -1,6 +1,6 @@
-bokeh
-numpy
+bokeh==2.4.3
+numpy==1.26.4
 pandas
-streamlit
+streamlit==1.34.0
 matplotlib
 st-gsheets-connection
