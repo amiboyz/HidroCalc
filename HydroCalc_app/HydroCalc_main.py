@@ -152,7 +152,9 @@ with col2:
 # #Input lamanya waktu Hidrograf
 # time_to_compute = st.number_input("Masukkan Lamanya waktu Hidrograph:", value=50)
 # Tombol untuk memulai analisis
-st.markdown("Masukan informasi pengguna di bawah ini untuk menjalankan kalkulasi")
+# st.markdown("Masukan informasi pengguna di bawah ini untuk menjalankan kalkulasi")
+
+st.subheader('Calculation Form', divider='red')
 
 #Establishing a google Sheets connection
 conn = st.connection("gsheets", type=GSheetsConnection)
