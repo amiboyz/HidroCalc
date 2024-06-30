@@ -35,7 +35,7 @@ st.write('- **Snyder**: Metode ini menggunakan parameter karakteristik DAS untuk
 st.write('- **ITB-1**: Metode ini merupakan salah satu metode hidrograf sintesis yang dikembangkan oleh ITB.')
 st.write('- **ITB-2**: Metode ini juga merupakan metode hidrograf sintesis yang dikembangkan oleh ITB dengan pendekatan yang berbeda.')
 
-st.write('Aplikasi ini masih dalam proses pengembangaan masukan dan saran silakan hubungi: [Hazmi](mailto:miftahhazmi@gmail.com)
+st.write('Aplikasi ini masih dalam proses pengembangaan masukan dan saran silahkan hubungi: [Hazmi](mailto:miftahhazmi@gmail.com)')
 
 #st.subheader('Input Parameter Untuk Hujan Efektif', divider='blue')
 
