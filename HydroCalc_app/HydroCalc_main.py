@@ -156,7 +156,7 @@ st.markdown("Masukan informasi pengguna di bawah ini untuk menjalankan kalkulasi
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 #Fetch existing vendor data
-existing_data = conn.read(worksheet="Data", usecols=list(range(4)), ttl=5)
+existing_data = conn.read(worksheet="Data", usecols=list(range(5)), ttl=5)
 existing_data = existing_data.dropna(how="all")
 
 #st.dataframe(existing_data) #manampilkan database  
