@@ -189,24 +189,6 @@ if submit_button:
         st.warning("Pastikan Nama dan Profesi anda terisi")
         st.stop()
     else:
-        # Create a new row of user
-        user_data = pd.DataFrame(
-            [
-                    {
-                        "Nama_User": nama_user,
-                        "Profesi": jenis_profesi,
-                        "Tanggal_Akses": tanggal_akses,
-                        "Jam_Akses": jam_akses
-                    }
-            ]
-        )
-
-        # # Add the new user name to the existing data
-        update_df = pd.concat([existing_data, user_data], ignore_index=True)
-
-        # # Update Google Sheets with the user data
-        conn.update(worksheet="Data", data=update_df)
-        st.success("Pengisian Berhasil")
         #if st.button('Analisis Infiltrasi dan HSS'):    
         T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
         if Metode_infiltrasi == "SCS-CN":
@@ -521,3 +503,24 @@ if submit_button:
         st.write('Tabel Hidrograf Sintetik')
         st.write(df_Q_T)    
         #st.pyplot(p)
+        # Create a new row of user
+        masukan = st.text_area(label="Mohon masukan dan saran pada aplikasi ini")
+        user_data = pd.DataFrame(
+            [
+                    {
+                        "Nama_User": nama_user,
+                        "Profesi": jenis_profesi,
+                        "Tanggal_Akses": tanggal_akses,
+                        "Jam_Akses": jam_akses,
+                        "Masukan": masukan
+                    }
+            ]
+        )
+
+        # # Add the new user name to the existing data
+        update_df = pd.concat([existing_data, user_data], ignore_index=True)
+
+        # # Update Google Sheets with the user data
+        conn.update(worksheet="Data", data=update_df)
+        st.success("Pengisian masukan Berhasil")
+        
