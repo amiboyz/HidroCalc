@@ -546,10 +546,10 @@ if submit_button:
                     user_data = pd.DataFrame(
                         [
                                 {
-                                    # "Nama_User": nama_user,
-                                    # "Profesi": jenis_profesi,
-                                    # "Tanggal_Akses": tanggal_akses,
-                                    # "Jam_Akses": jam_akses,
+                                    "Nama_User": nama_user,
+                                    "Profesi": jenis_profesi,
+                                    "Tanggal_Akses": tanggal_akses,
+                                    "Jam_Akses": jam_akses,
                                     "Masukan": masukan
                                 }
                         ]
