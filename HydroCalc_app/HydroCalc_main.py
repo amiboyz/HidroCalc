@@ -171,11 +171,11 @@ JENIS_PROFESI = [
 
 # Membuat Form baru
 # with st.form(key="User_Form"):
-nama_user = st.text_input(label="Nama User*")
-jenis_profesi = st.selectbox("Profesi*", options=JENIS_PROFESI, index=None)
+nama_user = st.text_input(label="Nama*")
+jenis_profesi = st.selectbox("Pilih Profesi*", options=JENIS_PROFESI, index=None)
 tanggal_akses = datetime.now()
 jam_akses = datetime.now().time()
-masukan = st.text_area(label="Masukan Masukan dan Saran Anda")
+masukan = st.text_area(label="Masukan dan Saran Anda")
 
 # Mark Mandatory field
 st.markdown("**required*")
