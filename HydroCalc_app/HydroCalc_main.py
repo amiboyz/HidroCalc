@@ -21,7 +21,7 @@ from datetime import datetime
 # Mengatur judul dan deskripsi aplikasi
 st.title('Analisis Hujan Efektif dan Hidrograf Satuan Sintesis (HSS) dengan Modul HydroCalc')
 
-st.caption('by : [Haz](mailto:miftahhazmi@gmail.com)')
+#st.caption('by : [Haz](mailto:miftahhazmi@gmail.com)')
 
 st.write('Selamat datang di aplikasi berbasis web untuk perhitungan infiltrasi dan hidrograf satuan sintesis (HSS) menggunakan metode distribusi hujan PSA-007 dan ITB. Aplikasi ini dimaksudkan untuk membantu Anda dalam menganalisis hujan efektif dan menghasilkan hidrograf satuan sintesis.')
 
@@ -35,7 +35,7 @@ st.write('- **Snyder**: Metode ini menggunakan parameter karakteristik DAS untuk
 st.write('- **ITB-1**: Metode ini merupakan salah satu metode hidrograf sintesis yang dikembangkan oleh ITB.')
 st.write('- **ITB-2**: Metode ini juga merupakan metode hidrograf sintesis yang dikembangkan oleh ITB dengan pendekatan yang berbeda.')
 
-st.write('Aplikasi ini masih dalam proses pengembangaan masukan dan saran silahkan hubungi: [Hazmi](mailto:miftahhazmi@gmail.com)')
+st.write('Aplikasi ini masih dalam proses pengembangaan masukan dan saran silahkan hubungi: [Contact Us](mailto:miftahhazmi@gmail.com)')
 
 #st.subheader('Input Parameter Untuk Hujan Efektif', divider='blue')
 
