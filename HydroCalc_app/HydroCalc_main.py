@@ -85,6 +85,7 @@ with col1:
     jumlah_data_hujan = jumlah_jam_hujan / delta_jam_hujan
 with col2:
     st.subheader('Input Parameter HSS', divider='green')
+    nama_das = st.text_input(label="Masukan Nama DAS atau Subdas:")
     L = st.number_input("Masukkan Panjang Sungai (km):", value=28.763, format="%.3f")*1000  # panjang main stream [km]
     Lc = st.number_input("Masukkan Panjang Sungai Centroid (km):", value=17.165, format="%.3f")*1000 #0.5 * L 
     S = st.number_input("Masukkan Nilai Slope Sungai (m/m):", value=0.04794, format="%.6f")  # slope
@@ -526,3 +527,5 @@ if submit_button:
         #st.pyplot(fig2)
         st.write('Tabel Hidrograf Sintetik')
         st.write(df_Q_T)
+        pdf = create_pdf(data, "hasil_analisis.pdf")
+        download_button(pdf, "Hasil Analisis.pdf", "Download PDF", key='download-pdf')
