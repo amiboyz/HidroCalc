@@ -47,7 +47,7 @@ with col1:
     P = st.number_input("Masukkan Hujan Rencana (mm):", value=132.9, format="%.3f")
     ARF = st.number_input("Masukkan Area Reduction Factor (ARF):", value=0.97, format="%.3f")
 # Menyediakan pilihan input untuk metode infiltrasi
-    Metode_infiltrasi = st.radio('Pilih Metode Infiltrasi:', ['SCS-CN', 'Horton'])
+    Metode_infiltrasi = st.radio('Pilih Metode Infiltrasi:', ['SCS-CN', 'Horton', 'Hujan Efektif diketahui'])
 
     # Input untuk parameter-parameter berdasarkan pilihan metode infiltrasi
     if Metode_infiltrasi == 'SCS-CN':
@@ -58,31 +58,35 @@ with col1:
         f0 = st.number_input('Masukkan f0 (%):', value=50) / 100
         fc = st.number_input('Masukkan fc (mm):', value=5.0)
 
-    # Input lainnya
-    input_method_dis = st.radio('Pilih Metode Distribusi Hujan Jam-Jaman:', ['PSA-007', 'ITB'])
+        # Input lainnya
+        input_method_dis = st.radio('Pilih Metode Distribusi Hujan Jam-Jaman:', ['PSA-007', 'ITB'])
 
-    if input_method_dis == 'ITB':
-        delta_jam_hujan = st.radio('Pilih Hujan Jam-Jaman (Jam):', ['1', '1/2', '1/3', '1/4', '1/6'])
-        if delta_jam_hujan == '1':
-            delta_jam_hujan = 1
-        elif delta_jam_hujan == '1/2':
-            delta_jam_hujan = 1/2
-        elif delta_jam_hujan == '1/3':
-            delta_jam_hujan = 1/3
-        elif delta_jam_hujan == '1/4':
-            delta_jam_hujan = 1/4
-        elif delta_jam_hujan == '1/6':
-            delta_jam_hujan = 1/6
-        if delta_jam_hujan == 1:
-            jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6, 12, 24])
-        elif delta_jam_hujan != 1:
-            jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6])
-    elif input_method_dis == 'PSA-007':
-        delta_jam_hujan = st.radio('Pilih Hujan Jam-Jaman (Jam):', [1])
-        if delta_jam_hujan == 1:
-            jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6, 12, 24])
+        if input_method_dis == 'ITB':
+            delta_jam_hujan = st.radio('Pilih Hujan Jam-Jaman (Jam):', ['1', '1/2', '1/3', '1/4', '1/6'])
+            if delta_jam_hujan == '1':
+                delta_jam_hujan = 1
+            elif delta_jam_hujan == '1/2':
+                delta_jam_hujan = 1/2
+            elif delta_jam_hujan == '1/3':
+                delta_jam_hujan = 1/3
+            elif delta_jam_hujan == '1/4':
+                delta_jam_hujan = 1/4
+            elif delta_jam_hujan == '1/6':
+                delta_jam_hujan = 1/6
+            if delta_jam_hujan == 1:
+                jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6, 12, 24])
+            elif delta_jam_hujan != 1:
+                jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6])
+        elif input_method_dis == 'PSA-007':
+            delta_jam_hujan = st.radio('Pilih Hujan Jam-Jaman (Jam):', [1])
+            if delta_jam_hujan == 1:
+                jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6, 12, 24])
 
-    jumlah_data_hujan = jumlah_jam_hujan / delta_jam_hujan
+        jumlah_data_hujan = jumlah_jam_hujan / delta_jam_hujan
+    elif Metode_infiltrasi == 'Hujan Efektif diketahui':
+        # Input for Rainfall Data (R)
+        Re_input = st.text_area("Masukan Hujan Efektif (mm/jam), separated by commas", 
+                            "55.4,16.1,11.7,9.2,7.2,5.7")
 with col2:
     st.subheader('Input Parameter HSS', divider='green')
     nama_das = st.text_input(label="Masukan Nama DAS atau Subdas:")
@@ -214,23 +218,51 @@ if submit_button:
         # # Update Google Sheets with the user data
         conn.update(worksheet="Data", data=update_df)
         st.success("Pengisian Data Berhasil")
-        #if st.button('Analisis Infiltrasi dan HSS'):    
-        T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
-        if Metode_infiltrasi == "SCS-CN":
-            Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2, Iab= infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, distribusi, T)
-        elif Metode_infiltrasi == "Horton":
-            Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2= infiltrasi_Horton(P, ARF, k, f0, fc, jumlah_data_hujan, distribusi, T)
-        # Menampilkan hasil analisis
-        st.subheader('Hasil Analisis Infiltrasi')
-        #st.write(dfreffkum)
-        #st.bokeh_chart(fig)
-        if Metode_infiltrasi == "SCS-CN":
-            Initial_abstraction = np.max(np.round(Iab,3))
-            st.write('Nilai Initial Abstraction adalah', Initial_abstraction,' mm')        
-        st.write('Tabel Hasil Analisis Infiltrasi Jam-Jaman')
-        st.write(dfreff)
-        st.write('Grafik Infiltrasi Jam-jaman')
-        st.bokeh_chart(fig2)
+        #if st.button('Analisis Infiltrasi dan HSS'):
+        if Metode_infiltrasi == "SCS-CN" and "Horton":  
+            T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
+            if Metode_infiltrasi == "SCS-CN":
+                Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2, Iab= infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, distribusi, T)
+            elif Metode_infiltrasi == "Horton":
+                Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2= infiltrasi_Horton(P, ARF, k, f0, fc, jumlah_data_hujan, distribusi, T)
+
+            # Menampilkan hasil analisis
+            st.subheader('Hasil Analisis Infiltrasi')
+            #st.write(dfreffkum)
+            #st.bokeh_chart(fig)
+            if Metode_infiltrasi == "SCS-CN":
+                Initial_abstraction = np.max(np.round(Iab,3))
+                st.write('Nilai Initial Abstraction adalah', Initial_abstraction,' mm')        
+            st.write('Tabel Hasil Analisis Infiltrasi Jam-Jaman')
+            st.write(dfreff)
+            st.write('Grafik Infiltrasi Jam-jaman')
+            st.bokeh_chart(fig2)
+        elif Metode_infiltrasi == 'Hujan Efektif diketahui':
+            Hujan_Efektif = Re_input
+            x_values = list(range(1, len(Hujan_Efektif) + 1))
+            # Creating a DataFrame for the table
+            df = pd.DataFrame({
+                'Index': x_values,
+                'Value': Hujan_Efektif
+            })
+
+            # Displaying the DataFrame as a table in Streamlit
+            st.write("Tabel Hujan Efektif Jam-Jaman")
+            st.dataframe(df)
+
+
+            # Creating the bar chart
+            fig, ax = plt.subplots()
+            ax.bar(x_values, Hujan_Efektif, color='skyblue')
+
+            # Adding labels and title
+            ax.set_xlabel('Jam Ke-')
+            ax.set_ylabel('Hujan Efektif (mm)')
+            ax.set_title('Grafik Hujan Efektif')
+
+            # Displaying the bar chart in Streamlit
+            st.pyplot(fig)
+
 
         #if st.button('Analisis HSS'):
         ###############################################################
@@ -527,5 +559,4 @@ if submit_button:
         #st.pyplot(fig2)
         st.write('Tabel Hidrograf Sintetik')
         st.write(df_Q_T)
-        pdf = create_pdf(data, "hasil_analisis.pdf")
-        download_button(pdf, "Hasil Analisis.pdf", "Download PDF", key='download-pdf')
+        
