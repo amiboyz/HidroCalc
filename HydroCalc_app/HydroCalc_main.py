@@ -267,17 +267,17 @@ if submit_button:
             ti4 = np.arange(min(t4), time_to_compute + dt, dt)
             qi4 = np.interp(ti4, t4, q4)
     
-        # Membuat DataFrame untuk grafik interpolasi
-        data = {'Time (Jam ke-)': ti1}
-        if show_scs:
-            data['SCS (m3/s / mm)'] = qi1
-        if show_snyder:
-            data['Snyder (m3/s / mm)'] = qi2
-        if show_itb1:
-            data['ITB 1 (m3/s / mm)'] = qi3
-        if show_itb2:
-            data['ITB 2 (m3/s / mm)'] = qi4 
-        df_Q_T_int = pd.DataFrame(data)          
+        # # Membuat DataFrame untuk grafik interpolasi
+        # data = {'Time (Jam ke-)': ti1}
+        # if show_scs:
+        #     data['SCS (m3/s / mm)'] = qi1
+        # if show_snyder:
+        #     data['Snyder (m3/s / mm)'] = qi2
+        # if show_itb1:
+        #     data['ITB 1 (m3/s / mm)'] = qi3
+        # if show_itb2:
+        #     data['ITB 2 (m3/s / mm)'] = qi4 
+        # df_Q_T_int = pd.DataFrame(data)          
  
         # Menampilkan tabel
         print('Tabel Nilai Tp dan Qp setiap metode')
