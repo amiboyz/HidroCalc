@@ -386,12 +386,12 @@ if submit_button:
         ]].dropna()
 
                 # Filter tabel berdasarkan pilihan pengguna
-        df_Q_T_int = df_Q_T_int.loc[[
-            'SCS' if show_scs else None,
-            'Snyder' if show_snyder else None,
-            'ITB 1' if show_itb1 else None,
-            'ITB 2' if show_itb2 else None
-        ]].dropna()
+        # df_Q_T_int = df_Q_T_int.loc[[
+        #     'SCS' if show_scs else None,
+        #     'Snyder' if show_snyder else None,
+        #     'ITB 1' if show_itb1 else None,
+        #     'ITB 2' if show_itb2 else None
+        # ]].dropna()
 
         # Menampilkan tabel
         print('Tabel Nilai Tp dan Qp setiap metode')
