@@ -50,43 +50,44 @@ with col1:
     Metode_infiltrasi = st.radio('Pilih Metode Infiltrasi:', ['SCS-CN', 'Horton', 'Hujan Efektif diketahui'])
 
     # Input untuk parameter-parameter berdasarkan pilihan metode infiltrasi
-    if Metode_infiltrasi == 'SCS-CN':
-        CN = st.number_input('Masukkan CN:', value=78.39)
-        Im = st.number_input('Masukkan Im (%):', value=7.42)
-    elif Metode_infiltrasi == 'Horton':
-        k = st.number_input('Masukkan k (mm/jam):', value=1.0)
-        f0 = st.number_input('Masukkan f0 (%):', value=50) / 100
-        fc = st.number_input('Masukkan fc (mm):', value=5.0)
-
-        # Input lainnya
-        input_method_dis = st.radio('Pilih Metode Distribusi Hujan Jam-Jaman:', ['PSA-007', 'ITB'])
-
-        if input_method_dis == 'ITB':
-            delta_jam_hujan = st.radio('Pilih Hujan Jam-Jaman (Jam):', ['1', '1/2', '1/3', '1/4', '1/6'])
-            if delta_jam_hujan == '1':
-                delta_jam_hujan = 1
-            elif delta_jam_hujan == '1/2':
-                delta_jam_hujan = 1/2
-            elif delta_jam_hujan == '1/3':
-                delta_jam_hujan = 1/3
-            elif delta_jam_hujan == '1/4':
-                delta_jam_hujan = 1/4
-            elif delta_jam_hujan == '1/6':
-                delta_jam_hujan = 1/6
-            if delta_jam_hujan == 1:
-                jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6, 12, 24])
-            elif delta_jam_hujan != 1:
-                jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6])
-        elif input_method_dis == 'PSA-007':
-            delta_jam_hujan = st.radio('Pilih Hujan Jam-Jaman (Jam):', [1])
-            if delta_jam_hujan == 1:
-                jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6, 12, 24])
-
-        jumlah_data_hujan = jumlah_jam_hujan / delta_jam_hujan
-    elif Metode_infiltrasi == 'Hujan Efektif diketahui':
+    if Metode_infiltrasi == 'Hujan Efektif diketahui':
         # Input for Rainfall Data (R)
         Re_input = st.text_area("Masukan Hujan Efektif (mm/jam), separated by commas", 
                             "55.4,16.1,11.7,9.2,7.2,5.7")
+    elif Metode_infiltrasi == 'SCS-CN' or 'Horton': 
+        if Metode_infiltrasi == 'SCS-CN':
+            CN = st.number_input('Masukkan CN:', value=78.39)
+            Im = st.number_input('Masukkan Im (%):', value=7.42)
+        elif Metode_infiltrasi == 'Horton':
+            k = st.number_input('Masukkan k (mm/jam):', value=1.0)
+            f0 = st.number_input('Masukkan f0 (%):', value=50) / 100
+            fc = st.number_input('Masukkan fc (mm):', value=5.0)
+
+            # Input lainnya
+            input_method_dis = st.radio('Pilih Metode Distribusi Hujan Jam-Jaman:', ['PSA-007', 'ITB'])
+
+            if input_method_dis == 'ITB':
+                delta_jam_hujan = st.radio('Pilih Hujan Jam-Jaman (Jam):', ['1', '1/2', '1/3', '1/4', '1/6'])
+                if delta_jam_hujan == '1':
+                    delta_jam_hujan = 1
+                elif delta_jam_hujan == '1/2':
+                    delta_jam_hujan = 1/2
+                elif delta_jam_hujan == '1/3':
+                    delta_jam_hujan = 1/3
+                elif delta_jam_hujan == '1/4':
+                    delta_jam_hujan = 1/4
+                elif delta_jam_hujan == '1/6':
+                    delta_jam_hujan = 1/6
+                if delta_jam_hujan == 1:
+                    jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6, 12, 24])
+                elif delta_jam_hujan != 1:
+                    jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6])
+            elif input_method_dis == 'PSA-007':
+                delta_jam_hujan = st.radio('Pilih Hujan Jam-Jaman (Jam):', [1])
+                if delta_jam_hujan == 1:
+                    jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6, 12, 24])
+
+            jumlah_data_hujan = jumlah_jam_hujan / delta_jam_hujan
 with col2:
     st.subheader('Input Parameter HSS', divider='green')
     nama_das = st.text_input(label="Masukan Nama DAS atau Subdas:")
