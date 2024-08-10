@@ -222,7 +222,7 @@ if submit_button:
         conn.update(worksheet="Data", data=update_df)
         st.success("Pengisian Data Berhasil")
         #if st.button('Analisis Infiltrasi dan HSS'):
-        if Metode_infiltrasi == "SCS-CN" and "Horton":  
+        if Metode_infiltrasi == "SCS-CN" or "Horton":  
             T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
             if Metode_infiltrasi == "SCS-CN":
                 Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2, Iab= infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, distribusi, T)
@@ -431,7 +431,7 @@ if submit_button:
 
 
         # Membuat p_bar dengan menambahkan nol hingga panjangnya sama dengan T
-        if Metode_infiltrasi == "SCS-CN" and "Horton": 
+        if Metode_infiltrasi == "SCS-CN" or "Horton": 
             p_bar = np.concatenate((p, np.zeros((len(T1) - len(p)))))
             Infiltrasi_bar = np.concatenate((Infiltrasi, np.zeros((len(T1) - len(Infiltrasi)))))
             plt.figure(figsize=(12, 6))
