@@ -191,7 +191,7 @@ if submit_button:
             st.write(dfreff)
             st.write('Grafik Infiltrasi Jam-jaman')
             st.bokeh_chart(fig2)
-        elif Metode_infiltrasi != "SCS-CN" or "Horton":
+        else:# Metode_infiltrasi == 'Hujan Efektif diketahui':
             Hujan_Efektif = Re_input
             x_values = list(range(1, len(Hujan_Efektif) + 1))
             # Creating a DataFrame for the table
@@ -452,7 +452,7 @@ if submit_button:
             plt.grid(True)
             plt.show()
             fig2=fig
-        if Metode_infiltrasi == 'Hujan Efektif diketahui': 
+        else:# Metode_infiltrasi == 'Hujan Efektif diketahui': 
             p_bar = np.concatenate((p, np.zeros((len(T) - len(p)))))
             
             plt.figure(figsize=(12, 6))
