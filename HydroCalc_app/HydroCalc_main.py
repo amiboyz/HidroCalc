@@ -103,7 +103,13 @@ with col2:
     tr = 1
 
     # Input lamanya waktu Hidrograf
-    time_to_compute = st.number_input("Masukkan Lamanya waktu Hidrograf:", value=50) 
+    time_to_compute = st.number_input("Masukkan Lamanya waktu Hidrograf:", value=50)
+        # Pilihan checkbox untuk metode yang ingin ditampilkan
+    show_scs = st.checkbox('Tampilkan SCS', value=True)
+    show_snyder = st.checkbox('Tampilkan Snyder', value=True)
+    show_itb1 = st.checkbox('Tampilkan ITB 1', value=True)
+    show_itb2 = st.checkbox('Tampilkan ITB 2', value=True)
+
 # # Menyediakan pilihan input untuk metode infiltrasi
 # Metode_infiltrasi = st.radio('Pilih Metode Infiltrasi:', ['SCS-CN', 'Horton'])
 
@@ -371,11 +377,6 @@ if submit_button:
 
         df_Q_T_int = pd.DataFrame(data)
 
-        # Pilihan checkbox untuk metode yang ingin ditampilkan
-        show_scs = st.checkbox('Tampilkan SCS', value=True)
-        show_snyder = st.checkbox('Tampilkan Snyder', value=True)
-        show_itb1 = st.checkbox('Tampilkan ITB 1', value=True)
-        show_itb2 = st.checkbox('Tampilkan ITB 2', value=True)
 
         # Filter tabel berdasarkan pilihan pengguna
         Table_Tp_Qp = Table_Tp_Qp.loc[[
