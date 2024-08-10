@@ -337,17 +337,22 @@ if submit_button:
         # Data input
         p = Hujan_Efektif
         time_step_hours = delta_jam_hujan
-        Q_qp1 = qi1
-        Q_qp2 = qi2
-        Q_qp3 = qi3
-        Q_qp4 = qi4
+        if show_scs:
+            Q_qp1 = qi1
+            Q_peak1, t_peak1, V_total1, t_peak_V1,T1,Qtot1,V_cum1 =  calculate_Q_and_V(p,time_step_hours, Q_qp1, time_to_compute)
 
-        Q_peak1, t_peak1, V_total1, t_peak_V1,T1,Qtot1,V_cum1 =  calculate_Q_and_V(p,time_step_hours, Q_qp1, time_to_compute)
-        Q_peak2, t_peak2, V_total2, t_peak_V2,T2,Qtot2,V_cum2 =  calculate_Q_and_V(p,time_step_hours, Q_qp2, time_to_compute)
-        Q_peak3, t_peak3, V_total3, t_peak_V3,T3,Qtot3,V_cum3 =  calculate_Q_and_V(p,time_step_hours, Q_qp3, time_to_compute)
-        Q_peak4, t_peak4, V_total4, t_peak_V4,T4,Qtot4,V_cum4 =  calculate_Q_and_V(p,time_step_hours, Q_qp4, time_to_compute)
+        if show_snyder:
+            Q_qp2 = qi2
+            Q_peak2, t_peak2, V_total2, t_peak_V2,T2,Qtot2,V_cum2 =  calculate_Q_and_V(p,time_step_hours, Q_qp2, time_to_compute)
 
+        if show_itb1:
+            Q_qp3 = qi3
+            Q_peak3, t_peak3, V_total3, t_peak_V3,T3,Qtot3,V_cum3 =  calculate_Q_and_V(p,time_step_hours, Q_qp3, time_to_compute)
 
+        if show_itb2:
+            Q_qp4 = qi4
+            Q_peak4, t_peak4, V_total4, t_peak_V4,T4,Qtot4,V_cum4 =  calculate_Q_and_V(p,time_step_hours, Q_qp4, time_to_compute)     
+                                                    
         # Membuat p_bar dengan menambahkan nol hingga panjangnya sama dengan T
         if Metode_infiltrasi == "SCS-CN" and "Horton": 
             p_bar = np.concatenate((p, np.zeros((len(T1) - len(p)))))
@@ -358,10 +363,14 @@ if submit_button:
             fsiz = 20
 
             # Membuat HSS
-            ax1.plot(T1, Qtot1[:len(T1)], marker='o', label='SCS')
-            ax1.plot(T2, Qtot2[:len(T2)], marker='o', label='Snyder')
-            ax1.plot(T3, Qtot3[:len(T3)], marker='o', label='ITB-1')
-            ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
+            if show_scs:
+                ax1.plot(T1, Qtot1[:len(T1)], marker='o', label='SCS')
+            if show_snyder:
+                ax1.plot(T2, Qtot2[:len(T2)], marker='o', label='Snyder')
+            if show_itb1:
+                ax1.plot(T3, Qtot3[:len(T3)], marker='o', label='ITB-1')
+            if show_itb2:
+                ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
             ax1.set_xlabel('T (Jam)', fontsize=fsiz)
             ax1.set_ylabel('Q (m³/det)', fontsize=fsiz)
             ax1.set_title('Hidrogaf Sintetik', fontsize=fsiz)
@@ -402,15 +411,17 @@ if submit_button:
             plt.show()
             fig1 = fig
 
-
             
-
             # Plot hubungan antara T dan Vtot
             fig, ax1 = plt.subplots(figsize=(12, 6))
-            ax1.plot(T1[:-1], V_cum1[:-1], marker='o', label='SCS')
-            ax1.plot(T2[:-1], V_cum2[:-1], marker='o', label='Snyder')
-            ax1.plot(T3[:-1], V_cum3[:-1], marker='o', label='ITB-1')
-            ax1.plot(T4[:-1], V_cum4[:-1], marker='o', label='ITB-2')
+            if show_scs:
+                ax1.plot(T1[:-1], V_cum1[:-1], marker='o', label='SCS')
+            if show_snyder:
+                ax1.plot(T2[:-1], V_cum2[:-1], marker='o', label='Snyder')
+            if show_itb1:
+                ax1.plot(T3[:-1], V_cum3[:-1], marker='o', label='ITB-1')
+            if show_itb2:
+                ax1.plot(T4[:-1], V_cum4[:-1], marker='o', label='ITB-2')
             ax1.set_xlabel('T (Jam)')
             ax1.set_ylabel('Volume (m3)')
             ax1.set_title('Hubungan antara V dan Q serta p')
@@ -447,10 +458,14 @@ if submit_button:
             fsiz = 20
 
             # Membuat HSS
-            ax1.plot(T1, Qtot1[:len(T1)], marker='o', label='SCS')
-            ax1.plot(T2, Qtot2[:len(T2)], marker='o', label='Snyder')
-            ax1.plot(T3, Qtot3[:len(T3)], marker='o', label='ITB-1')
-            ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
+            if show_scs:
+                ax1.plot(T1, Qtot1[:len(T1)], marker='o', label='SCS')
+            if show_snyder:
+                ax1.plot(T2, Qtot2[:len(T2)], marker='o', label='Snyder')
+            if show_itb1:
+                ax1.plot(T3, Qtot3[:len(T3)], marker='o', label='ITB-1')
+            if show_itb2:
+                ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
             ax1.set_xlabel('T (Jam)', fontsize=fsiz)
             ax1.set_ylabel('Q (m³/det)', fontsize=fsiz)
             ax1.set_title('Hidrogaf Sintetik', fontsize=fsiz)
@@ -485,10 +500,14 @@ if submit_button:
 
             # Plot hubungan antara T dan Vtot
             fig, ax1 = plt.subplots(figsize=(12, 6))
-            ax1.plot(T1[:-1], V_cum1[:-1], marker='o', label='SCS')
-            ax1.plot(T2[:-1], V_cum2[:-1], marker='o', label='Snyder')
-            ax1.plot(T3[:-1], V_cum3[:-1], marker='o', label='ITB-1')
-            ax1.plot(T4[:-1], V_cum4[:-1], marker='o', label='ITB-2')
+            if show_scs:
+                ax1.plot(T1[:-1], V_cum1[:-1], marker='o', label='SCS')
+            if show_snyder:
+                ax1.plot(T2[:-1], V_cum2[:-1], marker='o', label='Snyder')
+            if show_itb1:
+                ax1.plot(T3[:-1], V_cum3[:-1], marker='o', label='ITB-1')
+            if show_itb2:
+                ax1.plot(T4[:-1], V_cum4[:-1], marker='o', label='ITB-2')
             ax1.set_xlabel('T (Jam)')
             ax1.set_ylabel('Volume (m3)')
             ax1.set_title('Hubungan antara V dan Q serta p')
@@ -510,26 +529,68 @@ if submit_button:
             plt.show()
             fig2=fig
         # Tabel Time Peak dan Q Peak
+        # Table_Tp_Qp_p = pd.DataFrame({
+        #     'Time Peak (jam)': [t_peak1, t_peak2, t_peak3, t_peak4],
+        #     'Q Peak (m3/s)': [Q_peak1, Q_peak2, Q_peak3, Q_peak4]}, 
+        #     index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
+        # print(Table_Tp_Qp_p)
+
+        # Membuat Tabel Time Peak dan Q Peak
         Table_Tp_Qp_p = pd.DataFrame({
-            'Time Peak (jam)': [t_peak1, t_peak2, t_peak3, t_peak4],
-            'Q Peak (m3/s)': [Q_peak1, Q_peak2, Q_peak3, Q_peak4]}, 
-            index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
-        print(Table_Tp_Qp_p)
+            'Time Peak (Jam)': [t_peak1 if show_scs else None, t_peak2 if show_snyder else None, t_peak3 if show_itb1 else None, t_peak4 if show_itb2 else None],
+            'Time Peak (Menit)': [t_peak1 * 60 if show_scs else None, t_peak2 * 60 if show_snyder else None, t_peak3 * 60 if show_itb1 else None, t_peak4 * 60 if show_itb2 else None],
+            'Q Peak (m3/s / mm)': [Q_peak1 if show_scs else None, Q_peak2 if show_snyder else None, Q_peak3 if show_itb1 else None, Q_peak4 if show_itb2 else None]}, 
+            index=['SCS' if show_scs else None, 'Snyder' if show_snyder else None, 'ITB 1' if show_itb1 else None, 'ITB 2' if show_itb2 else None]
+        ).dropna()
 
+        # Table_T_V_p = pd.DataFrame({
+        # 'Time Peak (jam)': [t_peak_V1, t_peak_V1, t_peak_V1, t_peak_V1],
+        # 'Vtotal (m3)': [V_total1, V_total2, V_total3, V_total4]}, 
+        # index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
         Table_T_V_p = pd.DataFrame({
-        'Time Peak (jam)': [t_peak_V1, t_peak_V1, t_peak_V1, t_peak_V1],
-        'Vtotal (m3)': [V_total1, V_total2, V_total3, V_total4]}, 
-        index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
+            'Time Peak (Jam)': [t_peak_V1 if show_scs else None, t_peak_V2 if show_snyder else None, t_peak_V3 if show_itb1 else None, t_peak_V4 if show_itb2 else None],
+            'Vtotal (m3)': [V_total1 if show_scs else None, V_total2  if show_snyder else None, V_total3  if show_itb1 else None, V_total4 if show_itb2 else None]}, 
+            index=['SCS' if show_scs else None, 'Snyder' if show_snyder else None, 'ITB 1' if show_itb1 else None, 'ITB 2' if show_itb2 else None]
+        ).dropna()
 
-        data = {
-            'Time (Jam ke-)': T1,
-            'SCS (m3/s)': Qtot1[:len(T1)],
-            'Snyder (m3/s)': Qtot2[:len(T1)],
-            'ITB 1 (m3/s)': Qtot3[:len(T1)],
-            'ITB 2 (m3/s)': Qtot4[:len(T1)]
-        }
+        # data = {
+        #     'Time (Jam ke-)': T1,
+        #     'SCS (m3/s)': Qtot1[:len(T1)],
+        #     'Snyder (m3/s)': Qtot2[:len(T1)],
+        #     'ITB 1 (m3/s)': Qtot3[:len(T1)],
+        #     'ITB 2 (m3/s)': Qtot4[:len(T1)]
+        # }
 
+        #df_Q_T = pd.DataFrame(data)
+        # Initialize an empty dictionary for the data
+        
+        data = {}
+        # Add data to the dictionary based on the checkbox selection
+        if show_scs:
+            T=T1
+            data['SCS (m3/s)'] = Qtot1[:len(T)]
+
+        if show_snyder:
+            T=T2
+            data['Snyder (m3/s)'] = Qtot2[:len(T)]
+
+        if show_itb1:
+            T=T3
+            data['ITB 1 (m3/s)'] = Qtot3[:len(T)]
+
+        if show_itb2:
+            T=T4
+            data['ITB 2 (m3/s)'] = Qtot4[:len(T)]
+
+        # Add the 'Time (Jam ke-)' column
+        data['Time (Jam ke-)'] = T
+
+        # Create the DataFrame
         df_Q_T = pd.DataFrame(data)
+
+        # Reorder columns to have 'Time (Jam ke-)' as the first column
+        columns_order = ['Time (Jam ke-)'] + [col for col in df_Q_T.columns if col != 'Time (Jam ke-)']
+        df_Q_T = df_Q_T[columns_order]
 
         # Menampilkan tabel
         #print('Tabel Nilai T dan Q setiap metode')
