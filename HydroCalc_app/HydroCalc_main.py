@@ -431,7 +431,7 @@ if submit_button:
 
 
         # Membuat p_bar dengan menambahkan nol hingga panjangnya sama dengan T
-        if Metode_infiltrasi == 'SCS-CN' or 'Horton':
+        if Metode_infiltrasi == "SCS-CN" and "Horton": 
             p_bar = np.concatenate((p, np.zeros((len(T1) - len(p)))))
             Infiltrasi_bar = np.concatenate((Infiltrasi, np.zeros((len(T1) - len(Infiltrasi)))))
             plt.figure(figsize=(12, 6))
