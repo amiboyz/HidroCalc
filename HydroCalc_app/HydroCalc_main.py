@@ -627,7 +627,7 @@ if submit_button:
         st.write('Tabel Nilai T dan Q setiap metode HSS yang telah Interpolasi per delta t=1 Jam')
         st.write(df_Q_T_int)
         st.write('Grafik Hidrograf Sintetik dengan memasukan Hujan Efektif')
-        #st.pyplot(fig1)
+        st.pyplot(fig1)
         st.write('Tabel Nilai T peak dan Q peak')
         st.write(Table_Tp_Qp_p)
         st.write('Tabel T peak dan V peak')
