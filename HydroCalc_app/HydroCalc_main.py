@@ -102,10 +102,11 @@ with col2:
 
 with col3:
     st.subheader('Input Koefisien HSS', divider='blue')
-    ct = st.number_input("Masukkan nilai ct:", value=1.000, format="%.3f")
-    cp = st.number_input("Masukkan nilai cp:", value=1.000, format="%.3f")Alpha_itb1 = st.number_input("Masukkan nilai Alpha untuk HSS ITB 1 :", value=1.500, format="%.3f")
-    Alpha_itb2 = st.number_input("Masukkan nilai Alpha untuk HSS ITB 2 :", value=1.500, format="%.3f")
-    Beta_itb2 = st.number_input("Masukkan nilai Beta untuk HSS ITB 2 :", value=0.720, format="%.3f")
+    ct = st.number_input("ct:", value=1.000, format="%.3f")
+    cp = st.number_input("cp:", value=1.000, format="%.3f")
+    Alpha_itb1 = st.number_input("Alpha untuk HSS ITB 1 :", value=1.500, format="%.3f")
+    Alpha_itb2 = st.number_input("Alpha untuk HSS ITB 2 :", value=1.500, format="%.3f")
+    Beta_itb2 = st.number_input("Beta HSS ITB 2 :", value=0.720, format="%.3f")
     tr = 1
 
     # Input lamanya waktu Hidrograf
