@@ -43,10 +43,7 @@ st.write('Aplikasi ini masih dalam proses pengembangaan masukan dan saran silahk
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader('Input Parameter untuk Hujan Efektif', divider='blue')
-    P = st.number_input("Masukkan Hujan Rencana (mm):", value=132.9, format="%.3f")
-    ARF = st.number_input("Masukkan Area Reduction Factor (ARF):", value=0.97, format="%.3f")
-# Menyediakan pilihan input untuk metode infiltrasi
+    # Menyediakan pilihan input untuk metode infiltrasi
     Metode_infiltrasi = st.radio('Pilih Metode Infiltrasi:', ['SCS-CN', 'Horton', 'Hujan Efektif diketahui'])
 
     # Input untuk parameter-parameter berdasarkan pilihan metode infiltrasi
@@ -54,7 +51,10 @@ with col1:
         # Input for Rainfall Data (R)
         Re_input = st.text_area("Masukan Hujan Efektif (mm/jam), separated by commas", 
                             "55.4,16.1,11.7,9.2,7.2,5.7")
-    elif Metode_infiltrasi == 'SCS-CN' or 'Horton': 
+    elif Metode_infiltrasi == 'SCS-CN' or 'Horton':
+        st.subheader('Input Parameter untuk Hujan Efektif', divider='blue')
+        P = st.number_input("Masukkan Hujan Rencana (mm):", value=132.9, format="%.3f")
+        ARF = st.number_input("Masukkan Area Reduction Factor (ARF):", value=0.97, format="%.3f")
         if Metode_infiltrasi == 'SCS-CN':
             CN = st.number_input('Masukkan CN:', value=78.39)
             Im = st.number_input('Masukkan Im (%):', value=7.42)
