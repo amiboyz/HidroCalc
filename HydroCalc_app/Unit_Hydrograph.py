@@ -127,14 +127,19 @@ def HSS_ITB_1(ct,tr,cp,L,Lc,A):
 def HSS_ITB_2(ct,tr,cp,L,A):
     # Perhitungan waktu puncak
     #n = 0.3
-    tp= ct * (0.0394*(L/1000)+0.201*(L/1000)**0.5) 
-    Tp = 1.6* tp # waktu puncak
+    #metode nakayasu
+    if L < 15:
+         tl= ct * 0.201*(L/1000)**0.7
+    else:
+         tl= ct * (0.527+0.058*(L/1000))   
+    #tl= ct * (0.0394*(L/1000)+0.201*(L/1000)**0.5) 
+    Tp = 1.6* tl # waktu puncak
     Tb = 50 * Tp  # Tb/Tp = 20 (ditetapkan)
     T = np.arange(1, Tb, 1)
     T = np.insert(T, math.floor(Tp), Tp)  # Menyisipkan Tp ke dalam array T
     tpertp = T/Tp
     Alpha = 2.5
-    betha = 1
+    betha = 0.72
     qperqp=np.zeros_like(tpertp, dtype=float)   
     for i in range (len(tpertp)):
         if tpertp[i] <1:

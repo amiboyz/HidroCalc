@@ -520,7 +520,80 @@ if submit_button:
             plt.grid(True)
             plt.show()
             fig2=fig
+        if Metode_infiltrasi == 'Hujan Efektif diketahui': 
+            p_bar = np.concatenate((p, np.zeros((len(T1) - len(p)))))
+            plt.figure(figsize=(12, 6))
 
+            fig, ax1 = plt.subplots(figsize=(12, 6))
+            fsiz = 20
+
+            # Membuat HSS
+            ax1.plot(T1, Qtot1[:len(T1)], marker='o', label='SCS')
+            ax1.plot(T2, Qtot2[:len(T2)], marker='o', label='Snyder')
+            ax1.plot(T3, Qtot3[:len(T3)], marker='o', label='ITB-1')
+            ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
+            ax1.set_xlabel('T (Jam)', fontsize=fsiz)
+            ax1.set_ylabel('Q (m³/det)', fontsize=fsiz)
+            ax1.set_title('Hidrogaf Sintetik', fontsize=fsiz)
+
+            # Memperbesar ukuran tick pada sumbu x dan y
+            ax1.tick_params(axis='both', which='major', labelsize=fsiz)
+            ax1.tick_params(axis='both', which='minor', labelsize=fsiz)
+
+            # Membuat bar hujan efektif
+            ax2 = ax1.twinx()
+            ax2.bar(T1, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
+            ax2.set_ylabel('Hujan Efektif / Infiltrasi (mm)', fontsize=fsiz)
+            ax2.set_ylim(0, 200)
+            ax2.invert_yaxis()
+
+            # Memperbesar ukuran tick pada sumbu y dari ax2
+            ax2.tick_params(axis='y', which='major', labelsize=fsiz)
+            ax2.tick_params(axis='y', which='minor', labelsize=fsiz)
+
+            # Menyatukan legend dari semua sumbu
+            lines, labels = ax1.get_legend_handles_labels()
+            lines2, labels2 = ax2.get_legend_handles_labels()
+
+            ax1.legend(lines + lines2, labels + labels2, loc='upper right')
+
+            plt.grid(True)
+            plt.show()
+            fig1 = fig
+
+            # Plot hubungan antara T dan Vtot
+            fig, ax1 = plt.subplots(figsize=(12, 6))
+            ax1.plot(T1[:-1], V_cum1[:-1], marker='o', label='SCS')
+            ax1.plot(T2[:-1], V_cum2[:-1], marker='o', label='Snyder')
+            ax1.plot(T3[:-1], V_cum3[:-1], marker='o', label='ITB-1')
+            ax1.plot(T4[:-1], V_cum4[:-1], marker='o', label='ITB-2')
+            ax1.set_xlabel('T (Jam)')
+            ax1.set_ylabel('Volume (m3)')
+            ax1.set_title('Hubungan antara V dan Q serta p')
+
+            # Membuat bar hujan efektif
+            ax2 = ax1.twinx()
+            ax2.bar(T1, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
+            ax2.set_ylabel('Hujan Efektif(mm)')
+            ax2.set_ylim(0, 200)
+            ax2.invert_yaxis()  # Membalikkan arah y-axis
+            # Membuat bar infiltrasi
+
+            ax3 = ax1.twinx()
+            ax3.bar(T1, Infiltrasi_bar, alpha=0.3, label='Infiltrasi (mm)', color='r')
+            ax3.set_ylabel('Hujan Efektif(mm)')
+            ax3.set_ylim(0, 200)
+            ax3.invert_yaxis() 
+
+            #fig.legend(loc='upper right')
+            # Menyatukan legend dari semua sumbu
+            lines, labels = ax1.get_legend_handles_labels()
+            lines2, labels2 = ax2.get_legend_handles_labels()
+            lines3, labels3 = ax3.get_legend_handles_labels()
+            ax1.legend(lines + lines2 + lines3, labels + labels2 + labels3, loc='upper right')
+            plt.grid(True)
+            plt.show()
+            fig2=fig
         # Tabel Time Peak dan Q Peak
         Table_Tp_Qp_p = pd.DataFrame({
             'Time Peak (jam)': [t_peak1, t_peak2, t_peak3, t_peak4],
