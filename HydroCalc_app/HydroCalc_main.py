@@ -92,17 +92,18 @@ with col1:
 
         jumlah_data_hujan = jumlah_jam_hujan / delta_jam_hujan
 with col2:
-    st.subheader('Input Parameter HSS', divider='green')
+    st.subheader('Input Karakter DAS', divider='green')
     nama_das = st.text_input(label="Masukan Nama DAS atau Subdas:")
     L = st.number_input("Masukkan Panjang Sungai (km):", value=28.763, format="%.3f")*1000  # panjang main stream [km]
     Lc = st.number_input("Masukkan Panjang Sungai Centroid (km):", value=17.165, format="%.3f")*1000 #0.5 * L 
     S = st.number_input("Masukkan Nilai Slope Sungai (m/m):", value=0.04794, format="%.6f")  # slope
     A = st.number_input("Masukkan Luas DAS (km2):", value=52.297, format="%.3f")  # Luas DTA [km2]
-    ct = st.number_input("Masukkan nilai ct:", value=1.000, format="%.3f")
-    cp = st.number_input("Masukkan nilai cp:", value=1.000, format="%.3f")
+    
 
 with col3:
-    Alpha_itb1 = st.number_input("Masukkan nilai Alpha untuk HSS ITB 1 :", value=1.500, format="%.3f")
+    st.subheader('Input Koefisien HSS', divider='blue')
+    ct = st.number_input("Masukkan nilai ct:", value=1.000, format="%.3f")
+    cp = st.number_input("Masukkan nilai cp:", value=1.000, format="%.3f")Alpha_itb1 = st.number_input("Masukkan nilai Alpha untuk HSS ITB 1 :", value=1.500, format="%.3f")
     Alpha_itb2 = st.number_input("Masukkan nilai Alpha untuk HSS ITB 2 :", value=1.500, format="%.3f")
     Beta_itb2 = st.number_input("Masukkan nilai Beta untuk HSS ITB 2 :", value=0.720, format="%.3f")
     tr = 1
