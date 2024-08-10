@@ -40,7 +40,7 @@ st.write('Aplikasi ini masih dalam proses pengembangaan masukan dan saran silahk
 #st.subheader('Input Parameter Untuk Hujan Efektif', divider='blue')
 
 
-col1, col2 = st.columns(2)
+col1, col2,col3 = st.columns(3)
 
 with col1:
     # Menyediakan pilihan input untuk metode infiltrasi
@@ -100,6 +100,8 @@ with col2:
     A = st.number_input("Masukkan Luas DAS (km2):", value=52.297, format="%.3f")  # Luas DTA [km2]
     ct = st.number_input("Masukkan nilai ct:", value=1.000, format="%.3f")
     cp = st.number_input("Masukkan nilai cp:", value=1.000, format="%.3f")
+
+with col3:
     Alpha_itb1 = st.number_input("Masukkan nilai Alpha untuk HSS ITB 1 :", value=1.500, format="%.3f")
     Alpha_itb2 = st.number_input("Masukkan nilai Alpha untuk HSS ITB 2 :", value=1.500, format="%.3f")
     Beta_itb2 = st.number_input("Masukkan nilai Beta untuk HSS ITB 2 :", value=0.720, format="%.3f")
@@ -112,7 +114,6 @@ with col2:
     show_snyder = st.checkbox('Tampilkan Snyder', value=True)
     show_itb1 = st.checkbox('Tampilkan ITB 1', value=True)
     show_itb2 = st.checkbox('Tampilkan ITB 2', value=True)
-
 st.subheader('Calculation Form', divider='red')
 
 #Establishing a google Sheets connection
