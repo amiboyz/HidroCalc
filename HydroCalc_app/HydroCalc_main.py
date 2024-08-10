@@ -50,7 +50,8 @@ with col1:
     if Metode_infiltrasi == 'Hujan Efektif diketahui':
         # Input for Rainfall Data (R)
         Re_input = st.text_area("Masukan Hujan Efektif (mm/jam), separated by commas", 
-                            "55.4,16.1,11.7,9.2,7.2,5.7")
+                            "55.4, 16.1, 11.7, 9.2, 7.2, 5.7")
+        Re_input =np.array([float(x) for x in Re_input.split(',')])
     elif Metode_infiltrasi == 'SCS-CN' or 'Horton':
         st.subheader('Input Parameter untuk Hujan Efektif', divider='blue')
         P = st.number_input("Masukkan Hujan Rencana (mm):", value=132.9, format="%.3f")
