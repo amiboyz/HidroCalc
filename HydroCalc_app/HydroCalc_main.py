@@ -340,23 +340,23 @@ if submit_button:
         if show_scs:
             Q_qp1 = qi1
             Q_peak1, t_peak1, V_total1, t_peak_V1,T1,Qtot1,V_cum1 =  calculate_Q_and_V(p,time_step_hours, Q_qp1, time_to_compute)
-
+            T=T1
         if show_snyder:
             Q_qp2 = qi2
             Q_peak2, t_peak2, V_total2, t_peak_V2,T2,Qtot2,V_cum2 =  calculate_Q_and_V(p,time_step_hours, Q_qp2, time_to_compute)
-
+            T=T2
         if show_itb1:
             Q_qp3 = qi3
             Q_peak3, t_peak3, V_total3, t_peak_V3,T3,Qtot3,V_cum3 =  calculate_Q_and_V(p,time_step_hours, Q_qp3, time_to_compute)
-
+            T=T3
         if show_itb2:
             Q_qp4 = qi4
             Q_peak4, t_peak4, V_total4, t_peak_V4,T4,Qtot4,V_cum4 =  calculate_Q_and_V(p,time_step_hours, Q_qp4, time_to_compute)     
-                                                    
+            T=T4                                       
         # Membuat p_bar dengan menambahkan nol hingga panjangnya sama dengan T
         if Metode_infiltrasi == "SCS-CN" and "Horton": 
-            p_bar = np.concatenate((p, np.zeros((len(T1) - len(p)))))
-            Infiltrasi_bar = np.concatenate((Infiltrasi, np.zeros((len(T1) - len(Infiltrasi)))))
+            p_bar = np.concatenate((p, np.zeros((len(T) - len(p)))))
+            Infiltrasi_bar = np.concatenate((Infiltrasi, np.zeros((len(T) - len(Infiltrasi)))))
             plt.figure(figsize=(12, 6))
 
             fig, ax1 = plt.subplots(figsize=(12, 6))
@@ -381,7 +381,7 @@ if submit_button:
 
             # Membuat bar hujan efektif
             ax2 = ax1.twinx()
-            ax2.bar(T1, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
+            ax2.bar(T, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
             ax2.set_ylabel('Hujan Efektif / Infiltrasi (mm)', fontsize=fsiz)
             ax2.set_ylim(0, 200)
             ax2.invert_yaxis()
@@ -392,7 +392,7 @@ if submit_button:
 
             # Membuat bar infiltrasi
             ax3 = ax1.twinx()
-            ax3.bar(T1, Infiltrasi_bar, alpha=0.3, label='Infiltrasi (mm)', color='r')
+            ax3.bar(T, Infiltrasi_bar, alpha=0.3, label='Infiltrasi (mm)', color='r')
             #ax3.set_ylabel('Infiltrasi (mm)', fontsize=fsiz)
             ax3.set_ylim(0, 200)
             ax3.invert_yaxis()
@@ -428,14 +428,14 @@ if submit_button:
 
             # Membuat bar hujan efektif
             ax2 = ax1.twinx()
-            ax2.bar(T1, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
+            ax2.bar(T, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
             ax2.set_ylabel('Hujan Efektif(mm)')
             ax2.set_ylim(0, 200)
             ax2.invert_yaxis()  # Membalikkan arah y-axis
             # Membuat bar infiltrasi
 
             ax3 = ax1.twinx()
-            ax3.bar(T1, Infiltrasi_bar, alpha=0.3, label='Infiltrasi (mm)', color='r')
+            ax3.bar(T, Infiltrasi_bar, alpha=0.3, label='Infiltrasi (mm)', color='r')
             ax3.set_ylabel('Hujan Efektif(mm)')
             ax3.set_ylim(0, 200)
             ax3.invert_yaxis() 
@@ -476,7 +476,7 @@ if submit_button:
 
             # Membuat bar hujan efektif
             ax2 = ax1.twinx()
-            ax2.bar(T1, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
+            ax2.bar(T, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
             ax2.set_ylabel('Hujan Efektif / Infiltrasi (mm)', fontsize=fsiz)
             ax2.set_ylim(0, 200)
             ax2.invert_yaxis()
@@ -514,7 +514,7 @@ if submit_button:
 
             # Membuat bar hujan efektif
             ax2 = ax1.twinx()
-            ax2.bar(T1, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
+            ax2.bar(T, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
             ax2.set_ylabel('Hujan Efektif(mm)')
             ax2.set_ylim(0, 200)
             ax2.invert_yaxis()  # Membalikkan arah y-axis
