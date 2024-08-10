@@ -173,7 +173,7 @@ if submit_button:
         conn.update(worksheet="Data", data=update_df)
         st.success("Pengisian Data Berhasil")
         #if st.button('Analisis Infiltrasi dan HSS'):
-        if Metode_infiltrasi == "SCS-CN" and "Horton":  
+        if Metode_infiltrasi == "SCS-CN" or "Horton":  
             T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
             if Metode_infiltrasi == "SCS-CN":
                 Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2, Iab= infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, distribusi, T)
