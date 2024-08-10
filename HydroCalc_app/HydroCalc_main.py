@@ -48,6 +48,7 @@ with col1:
 
     # Input untuk parameter-parameter berdasarkan pilihan metode infiltrasi
     if Metode_infiltrasi == 'Hujan Efektif diketahui':
+        st.subheader('Input Nilai Hujan Efektif', divider='blue')
         # Input for Rainfall Data (R)
         Re_input = st.text_area("Masukan Hujan Efektif (mm/jam), separated by commas", 
                             "55.4, 16.1, 11.7, 9.2, 7.2, 5.7")
@@ -329,7 +330,7 @@ if submit_button:
 
         # # Show the plot
         # show(p)
-
+        
         # membuat T dan Q interpolasi
         ti1=np.arange(min(t1),time_to_compute+dt,dt)
         qi1=np.interp(ti1,t1,q1)
@@ -344,7 +345,8 @@ if submit_button:
         qi4=np.interp(ti4,t4,q4)
 
         ti=np.arange(min(t1),time_to_compute+dt,dt)
-
+        
+        
         # membuat tabel Q dan P HSS
         Table_T_Q_SCS=pd.DataFrame({'Jam ke -':t1,'Q SCS':q1})
         Table_T_Q_Snyder=pd.DataFrame({'Jam ke -':t2,'Q Snyder':q2})
@@ -369,6 +371,28 @@ if submit_button:
 
         df_Q_T_int = pd.DataFrame(data)
 
+        # Pilihan checkbox untuk metode yang ingin ditampilkan
+        show_scs = st.checkbox('Tampilkan SCS', value=True)
+        show_snyder = st.checkbox('Tampilkan Snyder', value=True)
+        show_itb1 = st.checkbox('Tampilkan ITB 1', value=True)
+        show_itb2 = st.checkbox('Tampilkan ITB 2', value=True)
+
+        # Filter tabel berdasarkan pilihan pengguna
+        Table_Tp_Qp = Table_Tp_Qp.loc[[
+            'SCS' if show_scs else None,
+            'Snyder' if show_snyder else None,
+            'ITB 1' if show_itb1 else None,
+            'ITB 2' if show_itb2 else None
+        ]].dropna()
+
+                # Filter tabel berdasarkan pilihan pengguna
+        df_Q_T_int = df_Q_T_int.loc[[
+            'SCS' if show_scs else None,
+            'Snyder' if show_snyder else None,
+            'ITB 1' if show_itb1 else None,
+            'ITB 2' if show_itb2 else None
+        ]].dropna()
+
         # Menampilkan tabel
         print('Tabel Nilai Tp dan Qp setiap metode')
         print(Table_Tp_Qp)
@@ -380,10 +404,14 @@ if submit_button:
         p = figure(title="HSS Interpolasi", x_axis_label='T (Jam ke-)', y_axis_label='Q (m3/s / mm)')
 
         # Add lines for each dataset
-        line1 = p.line(ti, qi1, legend_label='SCS', line_width=2, color='blue')
-        line2 = p.line(ti, qi2, legend_label='Snyder', line_width=2, color='green')
-        line3 = p.line(ti, qi3, legend_label='ITB 1', line_width=2, color='red')
-        line4 = p.line(ti, qi4, legend_label='ITB 2', line_width=2, color='orange')
+        if show_scs:
+            line1 = p.line(ti, qi1, legend_label='SCS', line_width=2, color='blue')
+        if show_snyder:
+            line2 = p.line(ti, qi2, legend_label='Snyder', line_width=2, color='green')
+        if show_itb1:
+            line3 = p.line(ti, qi3, legend_label='ITB 1', line_width=2, color='red')
+        if show_itb2:
+            line4 = p.line(ti, qi4, legend_label='ITB 2', line_width=2, color='orange')
 
         # Customize the legend
         p.legend.title = 'Methods'
