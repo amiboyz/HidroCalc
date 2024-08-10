@@ -257,15 +257,19 @@ if submit_button:
         if show_scs:
             ti1 = np.arange(min(t1), time_to_compute + dt, dt)
             qi1 = np.interp(ti1, t1, q1)
+            ti = np.arange(min(t1),time_to_compute+dt,dt)
         if show_snyder:
             ti2 = np.arange(min(t2), time_to_compute + dt, dt)
             qi2 = np.interp(ti2, t2, q2)
+            ti = np.arange(min(t2),time_to_compute+dt,dt)
         if show_itb1:
             ti3 = np.arange(min(t3), time_to_compute + dt, dt)
             qi3 = np.interp(ti3, t3, q3)
+            ti = np.arange(min(t3),time_to_compute+dt,dt)
         if show_itb2:
             ti4 = np.arange(min(t4), time_to_compute + dt, dt)
             qi4 = np.interp(ti4, t4, q4)
+            ti = np.arange(min(t4),time_to_compute+dt,dt)
     
         # # Membuat DataFrame untuk grafik interpolasi
         # data = {'Time (Jam ke-)': ti1}
