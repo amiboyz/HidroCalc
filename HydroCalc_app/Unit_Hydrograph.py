@@ -90,7 +90,7 @@ def Qp_Snyder(L,Lc,A,tr,ct,cp):
 ######################## ITB 1a ##############################
 ##############################################################
 
-def HSS_ITB_1(ct,tr,cp,L,Lc,A):
+def HSS_ITB_1(ct,tr,cp,L,Lc,A,Alpha):
     # Perhitungan waktu puncak
     n = 0.3
     tp= ct * (L/1000 * Lc/1000)**n #time leg sndyder
@@ -99,7 +99,7 @@ def HSS_ITB_1(ct,tr,cp,L,Lc,A):
     T = np.arange(1, Tb, 1)
     T = np.insert(T, math.floor(Tp), Tp)  # Menyisipkan Tp ke dalam array T
     tpertp = T/Tp
-    Alpha = 1.5
+    #Alpha = 1.5
     qperqp = np.exp(2-tpertp-1/tpertp)**(Alpha*cp)
     A_Hss_j=np.zeros_like(tpertp, dtype=float)
     # Perhitugan A HSS dengan integral
@@ -124,7 +124,7 @@ def HSS_ITB_1(ct,tr,cp,L,Lc,A):
 ######################## ITB 2 ###############################
 ##############################################################
 
-def HSS_ITB_2(ct,tr,cp,L,A):
+def HSS_ITB_2(ct,tr,cp,L,A,Alpha,betha):
     # Perhitungan waktu puncak
     #n = 0.3
     #metode nakayasu
@@ -138,8 +138,8 @@ def HSS_ITB_2(ct,tr,cp,L,A):
     T = np.arange(1, Tb, 1)
     T = np.insert(T, math.floor(Tp), Tp)  # Menyisipkan Tp ke dalam array T
     tpertp = T/Tp
-    Alpha = 2.5
-    betha = 0.72
+    #Alpha = 2.5
+    #betha = 0.72
     qperqp=np.zeros_like(tpertp, dtype=float)   
     for i in range (len(tpertp)):
         if tpertp[i] <1:

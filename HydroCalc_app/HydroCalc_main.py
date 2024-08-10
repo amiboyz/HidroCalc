@@ -100,6 +100,9 @@ with col2:
     A = st.number_input("Masukkan Luas DAS (km2):", value=52.297, format="%.3f")  # Luas DTA [km2]
     ct = st.number_input("Masukkan nilai ct:", value=1.000, format="%.3f")
     cp = st.number_input("Masukkan nilai cp:", value=1.000, format="%.3f")
+    Alpha_itb1 = st.number_input("Masukkan nilai Alpha untuk HSS ITB 1 :", value=1.500, format="%.3f")
+    Alpha_itb2 = st.number_input("Masukkan nilai Alpha untuk HSS ITB 2 :", value=1.500, format="%.3f")
+    Beta_itb2 = st.number_input("Masukkan nilai Beta untuk HSS ITB 2 :", value=0.720, format="%.3f")
     tr = 1
 
     # Input lamanya waktu Hidrograf
@@ -239,10 +242,10 @@ if submit_button:
             t2, q2, qp2, tp2 = Qp_Snyder(L, Lc, A, tr, ct, cp)
             Table_T_Q_Snyder=pd.DataFrame({'Jam ke -':t2,'Q Snyder':q2})
         if show_itb1:
-            t3, q3, qp3, tp3 = HSS_ITB_1(ct, tr, cp, L, Lc, A)
+            t3, q3, qp3, tp3 = HSS_ITB_1(ct, tr, cp, L, Lc, A, Alpha_itb1)
             Table_T_Q_ITB1=pd.DataFrame({'Jam ke -':t3,'Q ITB1':q3})
         if show_itb2:
-            t4, q4, qp4, tp4 = HSS_ITB_2(ct, tr, cp, L, A)
+            t4, q4, qp4, tp4 = HSS_ITB_2(ct, tr, cp, L, A, Alpha_itb2, Beta_itb2)
             Table_T_Q_ITB2=pd.DataFrame({'Jam ke -':t4,'Q ITB2':q4})
 
         # Membuat Tabel Time Peak dan Q Peak
