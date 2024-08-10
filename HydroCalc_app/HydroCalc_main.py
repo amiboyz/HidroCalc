@@ -450,7 +450,7 @@ if submit_button:
             plt.show()
             fig2=fig
         if Metode_infiltrasi == 'Hujan Efektif diketahui': 
-            p_bar = np.concatenate((p, np.zeros((len(T1) - len(p)))))
+            p_bar = np.concatenate((p, np.zeros((len(T) - len(p)))))
             
             plt.figure(figsize=(12, 6))
 
