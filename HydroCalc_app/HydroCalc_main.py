@@ -485,17 +485,7 @@ if submit_button:
             fig1 = fig
 
 
-            # Tabel Time Peak dan Q Peak
-            Table_Tp_Qp_p = pd.DataFrame({
-                'Time Peak (jam)': [t_peak1, t_peak2, t_peak3, t_peak4],
-                'Q Peak (m3/s)': [Q_peak1, Q_peak2, Q_peak3, Q_peak4]}, 
-                index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
-            print(Table_Tp_Qp_p)
-
-            Table_T_V_p = pd.DataFrame({
-            'Time Peak (jam)': [t_peak_V1, t_peak_V1, t_peak_V1, t_peak_V1],
-            'Vtotal (m3)': [V_total1, V_total2, V_total3, V_total4]}, 
-            index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
+            
 
             # Plot hubungan antara T dan Vtot
             fig, ax1 = plt.subplots(figsize=(12, 6))
@@ -531,6 +521,18 @@ if submit_button:
             plt.show()
             fig2=fig
 
+        # Tabel Time Peak dan Q Peak
+            Table_Tp_Qp_p = pd.DataFrame({
+                'Time Peak (jam)': [t_peak1, t_peak2, t_peak3, t_peak4],
+                'Q Peak (m3/s)': [Q_peak1, Q_peak2, Q_peak3, Q_peak4]}, 
+                index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
+            print(Table_Tp_Qp_p)
+
+            Table_T_V_p = pd.DataFrame({
+            'Time Peak (jam)': [t_peak_V1, t_peak_V1, t_peak_V1, t_peak_V1],
+            'Vtotal (m3)': [V_total1, V_total2, V_total3, V_total4]}, 
+            index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
+            
         data = {
             'Time (Jam ke-)': T1,
             'SCS (m3/s)': Qtot1[:len(T1)],
