@@ -110,65 +110,6 @@ with col2:
     show_itb1 = st.checkbox('Tampilkan ITB 1', value=True)
     show_itb2 = st.checkbox('Tampilkan ITB 2', value=True)
 
-# # Menyediakan pilihan input untuk metode infiltrasi
-# Metode_infiltrasi = st.radio('Pilih Metode Infiltrasi:', ['SCS-CN', 'Horton'])
-
-# # Input untuk parameter-parameter berdasarkan pilihan metode infiltrasi
-# if Metode_infiltrasi == 'SCS-CN':
-#     CN = st.number_input('Masukkan CN:', min_value=0, max_value=100, value=98, step=1)
-#     Im = st.number_input('Masukkan Im (mm):', min_value=0.0, value=5.0, step=0.1)
-# elif Metode_infiltrasi == 'Horton':
-#     k = st.number_input('Masukkan k (mm/jam):', min_value=0.0, value=1.0, step=0.1)
-#     f0 = st.number_input('Masukkan f0 (%):', min_value=0, max_value=100, value=50, step=1)/100
-#     fc = st.number_input('Masukkan fc (mm):', min_value=0.0, value=5.0, step=0.1)
-
-# # Input lainnya
-
-# input_method_dis = st.radio('Pilih Metode Distribusi:', ['PSA-007', 'ITB'])
-
-# if input_method_dis == 'ITB':
-#     delta_jam_hujan = st.radio('Pilih Hujan Jam-Jaman (Jam):', ['1', '1/2', '1/3', '1/4', '1/6'])
-#     if delta_jam_hujan == '1':
-#         delta_jam_hujan = 1
-#     elif delta_jam_hujan == '1/2':
-#         delta_jam_hujan = 1/2
-#     elif delta_jam_hujan == '1/3':
-#         delta_jam_hujan = 1/3
-#     elif delta_jam_hujan == '1/4':
-#         delta_jam_hujan = 1/4
-#     elif delta_jam_hujan == '1/6':
-#         delta_jam_hujan = 1/6
-#     if delta_jam_hujan == 1:
-#         jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6, 12, 24])
-#     elif delta_jam_hujan != 1:
-#         jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6])
-# elif input_method_dis == 'PSA-007':
-#     delta_jam_hujan = st.radio('Pilih Hujan Jam-Jaman (Jam):', [1])
-#     if delta_jam_hujan == 1:
-#         jumlah_jam_hujan = st.radio('Jumlah Jam Hujan (Jam):', [6, 12, 24])
-        
-# jumlah_data_hujan = jumlah_jam_hujan / delta_jam_hujan
-
-# st.write('Input Hujan Rencana dan Area Reduction Factor')
-# P = st.number_input("Masukkan Hujan Rencana (mm):", value=132.9)
-# ARF = st.number_input("Masukkan Area Reduction Factor (ARF):", value=0.97)
-
-
-# st.subheader('Input Parameter HSS', divider='blue')#Input Karakter DAS 
-# L=st.number_input("Masukan Panjang Sungai (m):", value=28763) #panjang main stream [m]
-# st.write('Nilai Lc = 0.5 x L')
-# Lc = 0.5*L 
-# S=st.number_input("Masukkan Nilai Slope Das (m/m):", value=0.006) #slope
-# A = st.number_input("Masukkan Luas DAS (km2):", value=52.297)  #Luas DTA [km2]
-# ct =st.number_input("Masukkan nilai ct:", value=1)
-# cp =st.number_input("Masukkan nilai cp:", value=1)
-# tr =1
-
-# #Input lamanya waktu Hidrograf
-# time_to_compute = st.number_input("Masukkan Lamanya waktu Hidrograph:", value=50)
-# Tombol untuk memulai analisis
-# st.markdown("Masukan informasi pengguna di bawah ini untuk menjalankan kalkulasi")
-
 st.subheader('Calculation Form', divider='red')
 
 #Establishing a google Sheets connection
@@ -285,115 +226,59 @@ if submit_button:
 
         dt = delta_jam_hujan
 
-        t1,q1,qp1,tp1=Qp_SCS(L,S,A,tr)
-        t2,q2,qp2,tp2=Qp_Snyder(L,Lc,A,tr,ct,cp)
-        t3,q3,qp3,tp3=HSS_ITB_1(ct,tr,cp,L,Lc,A)
-        t4,q4,qp4,tp4=HSS_ITB_2(ct,tr,cp,L,A)
+        # t1,q1,qp1,tp1=Qp_SCS(L,S,A,tr)
+        # t2,q2,qp2,tp2=Qp_Snyder(L,Lc,A,tr,ct,cp)
+        # t3,q3,qp3,tp3=HSS_ITB_1(ct,tr,cp,L,Lc,A)
+        # t4,q4,qp4,tp4=HSS_ITB_2(ct,tr,cp,L,A)
 
-        # Membuat DataFrame
-        data1 = {
-            'Time SCS': t1,
-            'SCS': q1,
-        }
-        data2 = {
-            'Time Synder': t2,
-            'Snyder': q2,
-        }
-        data3 = {
-            'Time ITB1': t3,
-            'ITB 1': q3,
-        }
-        data4 = {
-            'Time ITB2': t4,
-            'ITB 2': q4,
-        }  
-        df_TperTp_QperQp1 = pd.DataFrame(data1)
-        #print(df_TperTp_QperQp1)
-        df_TperTp_QperQp2 = pd.DataFrame(data2)
-        #print(df_TperTp_QperQp2)
-        df_TperTp_QperQp3 = pd.DataFrame(data3)
-        #print(df_TperTp_QperQp3)
-        df_TperTp_QperQp4 = pd.DataFrame(data4)
-        #print(df_TperTp_QperQp4)
+        # Kalkulasi tiap metode
+        if show_scs:
+            t1, q1, qp1, tp1 = Qp_SCS(L, S, A, tr)
+            Table_T_Q_SCS=pd.DataFrame({'Jam ke -':t1,'Q SCS':q1})
+        if show_snyder:
+            t2, q2, qp2, tp2 = Qp_Snyder(L, Lc, A, tr, ct, cp)
+            Table_T_Q_Snyder=pd.DataFrame({'Jam ke -':t2,'Q Snyder':q2})
+        if show_itb1:
+            t3, q3, qp3, tp3 = HSS_ITB_1(ct, tr, cp, L, Lc, A)
+            Table_T_Q_ITB1=pd.DataFrame({'Jam ke -':t3,'Q ITB1':q3})
+        if show_itb2:
+            t4, q4, qp4, tp4 = HSS_ITB_2(ct, tr, cp, L, A)
+            Table_T_Q_ITB2=pd.DataFrame({'Jam ke -':t4,'Q ITB2':q4})
 
-        # # Create a new plot with a title and axis labels
-        # p = figure(title="Flow Over Time", x_axis_label='Time (Jam)', y_axis_label='Flow (m3/s / mm)', 
-        #            x_range=(-3, time_to_compute+3))
-
-        # # Add lines for each dataset
-        # line1 = p.line(t1, q1, legend_label='SCS', line_width=2, color='blue')
-        # line2 = p.line(t2, q2, legend_label='Snyder', line_width=2, color='green')
-        # line3 = p.line(t3, q3, legend_label='ITB 1', line_width=2, color='red')
-        # line4 = p.line(t4, q4, legend_label='ITB 2', line_width=2, color='orange')
-
-        # # Customize the legend
-        # p.legend.title = 'Methods'
-        # p.legend.location = 'top_right'
-        # p.legend.click_policy = 'hide'
-
-        # # Show the grid
-        # p.grid.visible = True
-
-        # # Show the plot
-        # show(p)
-        
-        # membuat T dan Q interpolasi
-        ti1=np.arange(min(t1),time_to_compute+dt,dt)
-        qi1=np.interp(ti1,t1,q1)
-
-        ti2=np.arange(min(t2),time_to_compute+dt,dt)
-        qi2=np.interp(ti2,t2,q2)
-
-        ti3=np.arange(min(t3),time_to_compute+dt,dt)
-        qi3=np.interp(ti3,t3,q3)
-
-        ti4=np.arange(min(t4),time_to_compute+dt,dt)
-        qi4=np.interp(ti4,t4,q4)
-
-        ti=np.arange(min(t1),time_to_compute+dt,dt)
-        
-        
-        # membuat tabel Q dan P HSS
-        Table_T_Q_SCS=pd.DataFrame({'Jam ke -':t1,'Q SCS':q1})
-        Table_T_Q_Snyder=pd.DataFrame({'Jam ke -':t2,'Q Snyder':q2})
-        Table_T_Q_ITB1=pd.DataFrame({'Jam ke -':t3,'Q ITB1':q3})
-        Table_T_Q_ITB2=pd.DataFrame({'Jam ke -':t4,'Q ITB2':q4})
-
-        # Membuat Tabel Time Peak dan Q peak
+        # Membuat Tabel Time Peak dan Q Peak
         Table_Tp_Qp = pd.DataFrame({
-            'Time Peak (Jam)': [tp1, tp2, tp3, tp4],
-            'Time Peak (Menit)': [tp1*60, tp2*60, tp3*60, tp4*60],
-            'Q Peak (m3/s / mm)': [qp1, qp2, qp3, qp4]}, 
-            index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
+            'Time Peak (Jam)': [tp1 if show_scs else None, tp2 if show_snyder else None, tp3 if show_itb1 else None, tp4 if show_itb2 else None],
+            'Time Peak (Menit)': [tp1 * 60 if show_scs else None, tp2 * 60 if show_snyder else None, tp3 * 60 if show_itb1 else None, tp4 * 60 if show_itb2 else None],
+            'Q Peak (m3/s / mm)': [qp1 if show_scs else None, qp2 if show_snyder else None, qp3 if show_itb1 else None, qp4 if show_itb2 else None]}, 
+            index=['SCS' if show_scs else None, 'Snyder' if show_snyder else None, 'ITB 1' if show_itb1 else None, 'ITB 2' if show_itb2 else None]
+        ).dropna()
 
-        # Membuat DataFrame
-        data = {
-            'Time (Jam ke-)': ti1,
-            'SCS (m3/s / mm)': qi1,
-            'Snyder (m3/s / mm)': qi2,
-            'ITB 1 (m3/s / mm)': qi3,
-            'ITB 2 (m3/s / mm)': qi4
-        }
-
-        df_Q_T_int = pd.DataFrame(data)
-
-
-        # Filter tabel berdasarkan pilihan pengguna
-        Table_Tp_Qp = Table_Tp_Qp.loc[[
-            'SCS' if show_scs else None,
-            'Snyder' if show_snyder else None,
-            'ITB 1' if show_itb1 else None,
-            'ITB 2' if show_itb2 else None
-        ]].dropna()
-
-                # Filter tabel berdasarkan pilihan pengguna
-        # df_Q_T_int = df_Q_T_int.loc[[
-        #     'SCS' if show_scs else None,
-        #     'Snyder' if show_snyder else None,
-        #     'ITB 1' if show_itb1 else None,
-        #     'ITB 2' if show_itb2 else None
-        # ]].dropna()
-
+        # Membuat T dan Q interpolasi
+        if show_scs:
+            ti1 = np.arange(min(t1), time_to_compute + dt, dt)
+            qi1 = np.interp(ti1, t1, q1)
+        if show_snyder:
+            ti2 = np.arange(min(t2), time_to_compute + dt, dt)
+            qi2 = np.interp(ti2, t2, q2)
+        if show_itb1:
+            ti3 = np.arange(min(t3), time_to_compute + dt, dt)
+            qi3 = np.interp(ti3, t3, q3)
+        if show_itb2:
+            ti4 = np.arange(min(t4), time_to_compute + dt, dt)
+            qi4 = np.interp(ti4, t4, q4)
+    
+        # Membuat DataFrame untuk grafik interpolasi
+        data = {'Time (Jam ke-)': ti1}
+        if show_scs:
+            data['SCS (m3/s / mm)'] = qi1
+        if show_snyder:
+            data['Snyder (m3/s / mm)'] = qi2
+        if show_itb1:
+            data['ITB 1 (m3/s / mm)'] = qi3
+        if show_itb2:
+            data['ITB 2 (m3/s / mm)'] = qi4 
+        df_Q_T_int = pd.DataFrame(data)          
+ 
         # Menampilkan tabel
         print('Tabel Nilai Tp dan Qp setiap metode')
         print(Table_Tp_Qp)
