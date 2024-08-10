@@ -173,7 +173,7 @@ if submit_button:
         conn.update(worksheet="Data", data=update_df)
         st.success("Pengisian Data Berhasil")
         #if st.button('Analisis Infiltrasi dan HSS'):
-        if Metode_infiltrasi == "SCS-CN" or "Horton":  
+        if Metode_infiltrasi == "SCS-CN" or Metode_infiltrasi == "SCS-CN""Horton":
             T, distribusi, coef_dist = coef_dist_hujan(input_method_dis, jumlah_jam_hujan, delta_jam_hujan)
             if Metode_infiltrasi == "SCS-CN":
                 Jam_ke, Hujan_Rencana, Hujan_Rencana_ARF, Infiltrasi, Hujan_Efektif, dfreffkum, dfreff, fig, fig2, Iab= infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, distribusi, T)
@@ -191,7 +191,7 @@ if submit_button:
             st.write(dfreff)
             st.write('Grafik Infiltrasi Jam-jaman')
             st.bokeh_chart(fig2)
-        else:# Metode_infiltrasi == 'Hujan Efektif diketahui':
+        elif Metode_infiltrasi == 'Hujan Efektif diketahui':
             Hujan_Efektif = Re_input
             x_values = list(range(1, len(Hujan_Efektif) + 1))
             # Creating a DataFrame for the table
@@ -357,7 +357,7 @@ if submit_button:
             Q_peak4, t_peak4, V_total4, t_peak_V4,T4,Qtot4,V_cum4 =  calculate_Q_and_V(p,time_step_hours, Q_qp4, time_to_compute)     
             T=T4                                       
         # Membuat p_bar dengan menambahkan nol hingga panjangnya sama dengan T
-        if Metode_infiltrasi == "SCS-CN" or "Horton": 
+        if Metode_infiltrasi == "SCS-CN" or Metode_infiltrasi == "SCS-CN""Horton": 
             p_bar = np.concatenate((p, np.zeros((len(T) - len(p)))))
             Infiltrasi_bar = np.concatenate((Infiltrasi, np.zeros((len(T) - len(Infiltrasi)))))
             plt.figure(figsize=(12, 6))
@@ -452,7 +452,7 @@ if submit_button:
             plt.grid(True)
             plt.show()
             fig2=fig
-        else:# Metode_infiltrasi == 'Hujan Efektif diketahui': 
+        elif Metode_infiltrasi == 'Hujan Efektif diketahui': 
             p_bar = np.concatenate((p, np.zeros((len(T) - len(p)))))
             
             plt.figure(figsize=(12, 6))
