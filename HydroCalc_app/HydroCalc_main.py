@@ -43,6 +43,7 @@ st.write('Aplikasi ini masih dalam proses pengembangaan masukan dan saran silahk
 col1, col2,col3 = st.columns(3)
 
 with col1:
+    st.subheader('Input Metode Hujan Efektif', divider='green')
     # Menyediakan pilihan input untuk metode infiltrasi
     Metode_infiltrasi = st.radio('Pilih Metode Infiltrasi:', ['SCS-CN', 'Horton', 'Hujan Efektif diketahui'])
 
