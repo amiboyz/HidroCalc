@@ -85,7 +85,7 @@ def Qp_Snyder(L,Lc,A,tr,ct,cp):
     Q=qperqp*Qp
     T = np.insert(T,0,0)
     Q = np.insert(Q,0,0)    
-    return T,Q,Qp,Tp
+    return T,Q,Qp,Tp,qp
 
 ##############################################################
 ######################## ITB 1a ##############################
