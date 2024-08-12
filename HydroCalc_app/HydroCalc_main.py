@@ -243,7 +243,7 @@ if submit_button:
             t1, q1, qp1, tp1 = Qp_SCS(L, S, A, tr)
             Table_T_Q_SCS=pd.DataFrame({'Jam ke -':t1,'Q SCS':q1})
         if show_snyder:
-            t2, q2, qp2, tp2 = Qp_Snyder(L, Lc, A, tr, ct, cp)
+            t2, q2, qp2, tp2, q_p2 = Qp_Snyder(L, Lc, A, tr, ct, cp)
             Table_T_Q_Snyder=pd.DataFrame({'Jam ke -':t2,'Q Snyder':q2})
         if show_itb1:
             t3, q3, qp3, tp3 = HSS_ITB_1(ct, tr, cp, L, Lc, A, Alpha_itb1)
@@ -256,7 +256,7 @@ if submit_button:
         Table_Tp_Qp = pd.DataFrame({
             'Time Peak (Jam)': [tp1 if show_scs else None, tp2 if show_snyder else None, tp3 if show_itb1 else None, tp4 if show_itb2 else None],
             'Time Peak (Menit)': [tp1 * 60 if show_scs else None, tp2 * 60 if show_snyder else None, tp3 * 60 if show_itb1 else None, tp4 * 60 if show_itb2 else None],
-            'Q Peak (m3/s / mm)': [qp1 if show_scs else None, qp2 if show_snyder else None, qp3 if show_itb1 else None, qp4 if show_itb2 else None]}, 
+            'Q Peak (m3/s / mm)': [qp1 if show_scs else None, q_p2 if show_snyder else None, qp3 if show_itb1 else None, qp4 if show_itb2 else None]}, 
             index=['SCS' if show_scs else None, 'Snyder' if show_snyder else None, 'ITB 1' if show_itb1 else None, 'ITB 2' if show_itb2 else None]
         ).dropna()
 
