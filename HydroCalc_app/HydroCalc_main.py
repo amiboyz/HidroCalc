@@ -108,7 +108,7 @@ with col3:
     Alpha_itb1 = st.number_input("Alpha untuk HSS ITB 1 :", value=1.500, format="%.3f")
     Alpha_itb2 = st.number_input("Alpha untuk HSS ITB 2 :", value=1.500, format="%.3f")
     Beta_itb2 = st.number_input("Beta HSS ITB 2 :", value=0.720, format="%.3f")
-    tr = 1
+    #tr = 1
 
     # Input lamanya waktu Hidrograf
     time_to_compute = st.number_input("Masukkan Lamanya waktu Hidrograf:", value=50)
@@ -237,7 +237,7 @@ if submit_button:
         # t2,q2,qp2,tp2=Qp_Snyder(L,Lc,A,tr,ct,cp)
         # t3,q3,qp3,tp3=HSS_ITB_1(ct,tr,cp,L,Lc,A)
         # t4,q4,qp4,tp4=HSS_ITB_2(ct,tr,cp,L,A)
-
+        tr=len(Hujan_Efektif)
         # Kalkulasi tiap metode
         if show_scs:
             t1, q1, qp1, tp1 = Qp_SCS(L, S, A, tr)
