@@ -237,7 +237,8 @@ if submit_button:
         # t2,q2,qp2,tp2=Qp_Snyder(L,Lc,A,tr,ct,cp)
         # t3,q3,qp3,tp3=HSS_ITB_1(ct,tr,cp,L,Lc,A)
         # t4,q4,qp4,tp4=HSS_ITB_2(ct,tr,cp,L,A)
-        tr=len(Hujan_Efektif)
+        #tr=len(Hujan_Efektif)
+        tr=1
         # Kalkulasi tiap metode
         if show_scs:
             t1, q1, qp1, tp1 = Qp_SCS(L, S, A, tr)
