@@ -75,7 +75,8 @@ def Qp_Snyder(L,Lc,A,tr,ct,cp):
     else:
         t__p=tp + 0.25*(tr-tc)
         Tp=t__p + 0.5*(tr-tc)#tr
-    Qp=qp*A/1000 #1 mm
+    #Qp=qp*A/1000 #1 mm
+    Qp=qp
     tpertp=np.arange(0.1,10,0.1)
     lamda = (Qp*Tp*3600)/(1000*A)
     a=1.32*lamda**2+0.15*lamda+0.045
