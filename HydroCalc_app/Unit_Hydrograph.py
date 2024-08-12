@@ -67,15 +67,21 @@ def Qp_SCS(L,S,A,tr):
 def Qp_Snyder(L,Lc,A,tr,ct,cp):
     n = 0.3
     tp= ct * (L/1000 * Lc/1000)**n
+    #print('tp',tp)
     tc = tp/5.5
+    #print('tc',tc)
     qp=275*cp/tp #debit maksimum limpasan [liter/det/km2]
+    #print('qp',qp)
     if tc >= tr:
         t__p=tp+0.25*(tr-tc)
         Tp=t__p+0.5*tr#(tr-tc)
     else:
         t__p=tp + 0.25*(tr-tc)
         Tp=t__p + 0.5*(tr-tc)#tr
+    #print('Tp',Tp)
+    qp=275*cp/Tp #debit maksimum limpasan [liter/det/km2]
     Qp=qp*A/1000 #1 mm
+    #print('Qp',Qp)
     #Qp=qp
     tpertp=np.arange(0.1,10,0.1)
     lamda = (Qp*Tp*3600)/(1000*A)
