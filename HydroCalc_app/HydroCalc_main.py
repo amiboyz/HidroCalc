@@ -626,7 +626,9 @@ if submit_button:
         st.write('Grafik Hidrograf Sintetik dengan memasukan Hujan Efektif')
         st.pyplot(fig1)
         st.write('Tabel Nilai T peak dan Q peak')
-        st.write(Table_Tp_Qp_p)
+        # Enlarge the display of the table
+        st.dataframe(Table_Tp_Qp_p, width=800, height=400)  # You can adjust width and height as needed
+        #st.write(Table_Tp_Qp_p)
         #st.write('Tabel T peak dan V peak')
         #st.write(Table_T_V_p)
         #st.pyplot(fig2)
