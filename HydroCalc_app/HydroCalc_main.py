@@ -255,8 +255,8 @@ if submit_button:
 
         # Membuat Tabel Time Peak dan Q Peak
         Table_Tp_Qp = pd.DataFrame({
-            'Time Peak (Jam)': [tp1 if show_scs else None, tp2 if show_snyder else None, tp3 if show_itb1 else None, tp4 if show_itb2 else None],
-            'Time Peak (Menit)': [tp1 * 60 if show_scs else None, tp2 * 60 if show_snyder else None, tp3 * 60 if show_itb1 else None, tp4 * 60 if show_itb2 else None],
+            'Time Peak (Hours)': [tp1 if show_scs else None, tp2 if show_snyder else None, tp3 if show_itb1 else None, tp4 if show_itb2 else None],
+            'Time Peak (Minute)': [tp1 * 60 if show_scs else None, tp2 * 60 if show_snyder else None, tp3 * 60 if show_itb1 else None, tp4 * 60 if show_itb2 else None],
             'Q Peak (m3/s / mm)': [qp1 if show_scs else None, qp2 if show_snyder else None, qp3 if show_itb1 else None, qp4 if show_itb2 else None]}, 
             index=['SCS' if show_scs else None, 'Snyder' if show_snyder else None, 'ITB 1' if show_itb1 else None, 'ITB 2' if show_itb2 else None]
         ).dropna()
@@ -549,9 +549,9 @@ if submit_button:
 
         # Membuat Tabel Time Peak dan Q Peak
         Table_Tp_Qp_p = pd.DataFrame({
-            'Time Peak (Jam)': [t_peak1 if show_scs else None, t_peak2 if show_snyder else None, t_peak3 if show_itb1 else None, t_peak4 if show_itb2 else None],
-            'Time Peak (Menit)': [t_peak1 * 60 if show_scs else None, t_peak2 * 60 if show_snyder else None, t_peak3 * 60 if show_itb1 else None, t_peak4 * 60 if show_itb2 else None],
-            'Q Peak (m3/s / mm)': [Q_peak1 if show_scs else None, Q_peak2 if show_snyder else None, Q_peak3 if show_itb1 else None, Q_peak4 if show_itb2 else None]}, 
+            'Time Peak (Hours)': [t_peak1 if show_scs else None, t_peak2 if show_snyder else None, t_peak3 if show_itb1 else None, t_peak4 if show_itb2 else None],
+            'Time Peak (Minute)': [t_peak1 * 60 if show_scs else None, t_peak2 * 60 if show_snyder else None, t_peak3 * 60 if show_itb1 else None, t_peak4 * 60 if show_itb2 else None],
+            'Q Peak (m3/s/mm)': [Q_peak1 if show_scs else None, Q_peak2 if show_snyder else None, Q_peak3 if show_itb1 else None, Q_peak4 if show_itb2 else None]}, 
             index=['SCS' if show_scs else None, 'Snyder' if show_snyder else None, 'ITB 1' if show_itb1 else None, 'ITB 2' if show_itb2 else None]
         ).dropna()
 
@@ -560,7 +560,7 @@ if submit_button:
         # 'Vtotal (m3)': [V_total1, V_total2, V_total3, V_total4]}, 
         # index=['SCS', 'Snyder', 'ITB 1', 'ITB 2'])
         Table_T_V_p = pd.DataFrame({
-            'Time Peak (Jam)': [t_peak_V1 if show_scs else None, t_peak_V2 if show_snyder else None, t_peak_V3 if show_itb1 else None, t_peak_V4 if show_itb2 else None],
+            'Time Peak (Hours)': [t_peak_V1 if show_scs else None, t_peak_V2 if show_snyder else None, t_peak_V3 if show_itb1 else None, t_peak_V4 if show_itb2 else None],
             'Vtotal (m3)': [V_total1 if show_scs else None, V_total2  if show_snyder else None, V_total3  if show_itb1 else None, V_total4 if show_itb2 else None]}, 
             index=['SCS' if show_scs else None, 'Snyder' if show_snyder else None, 'ITB 1' if show_itb1 else None, 'ITB 2' if show_itb2 else None]
         ).dropna()
@@ -595,17 +595,17 @@ if submit_button:
             data['ITB 2 (m3/s)'] = Qtot4[:len(T)]
 
         # Add the 'Time (Jam ke-)' column
-        data['Time (Jam ke-)'] = T
+        data['Time (Hours)'] = T
 
         # Create the DataFrame
         df_Q_T = pd.DataFrame(data)
 
         # Reorder columns to have 'Time (Jam ke-)' as the first column
-        columns_order = ['Time (Jam ke-)'] + [col for col in df_Q_T.columns if col != 'Time (Jam ke-)']
+        columns_order = ['Time (Hours)'] + [col for col in df_Q_T.columns if col != 'Time (Hours)']
         df_Q_T = df_Q_T[columns_order]
 
         # Menambah angka 0 di depan
-        df_Q_T['Time (Jam ke-)'] = df_Q_T['Time (Jam ke-)']-1
+        df_Q_T['Time (Hours)'] = df_Q_T['Time (Hours)']-1
 
         # Menghilangkan angka terakhir
         #df_Q_T = df_Q_T.iloc[:-1]
