@@ -26,27 +26,24 @@ def Qp_SCS_CN(L,CN_sal,S,A):
 ##############################################################
 ######################## SCS #################################
 ##############################################################
-def Qp_SCS(L,S,A,C):
-    Tc=0.927*(L/S**0.5)**0.47 #waktu konsentrasi (jam)
-    print('Tc',Tc)
-    tp= 0.6*Tc #waktu naik  
-    print('tp',tp)
-    tr=2*tp/9
-    print('tr',tr)
-    Tp=tr/2+tp
-    #Tp=3.14
-    print('Tp',Tp)
-    
-    #C = 2.08 #koefisien
-    Tb=2.67 * Tp 
-    Qp=C*A/Tp
-    print('Qp',Qp)
-    qperqp=np.array([0,0.18,0.66,0.99,0.86,0.57,0.28,0.17,0.12,0.09,0.06,
-                     0.04,0.02,0.02,0.01,0.01])
-    t = np.arange(len(qperqp))
-    tpertp = t/Tp
+
+def Qp_SCS(L,S,A,tr):
+    Tc=0.01947*L**0.77*S**(-0.385) #waktu konsentrasi (menit)
+    tp_aw= Tc/60 #waktu kelambatan (jam), Tc ubah dari menit ke jam 
+    Tp= tr/2 + tp_aw #waktu naik  
+    C = 2.08 #koefisien
+    Qp=C*A/Tp/10
+    tp=2.67 * Tp 
+    tpertp = np.concatenate([
+    np.arange(0, 1.6, 0.1),  # dari 0 hingga 1.6 dengan langkah 0.1
+    np.arange(1.6, 3.1, 0.2), # dari 1.6 hingga 3 dengan langkah 0.2
+    np.arange(3.5, 5.1, 0.5)  # dari 3.5 hingga 5 dengan langkah 0.5
+    ])
+    qperqp=np.array([0,0.015,0.075,0.16,0.28,0.43,0.6,0.77,0.89,0.97,1,
+                     0.98,0.92,0.84,0.75,0.66,0.56,0.42,0.32,0.24,0.18,0.13,
+                     0.098,0.075,0.036,0.018,0.009,0.004])
     # Tambahan nilai 0 sebanyak n
-    n = 1
+    n = 50
     qperqp = np.concatenate((qperqp, np.zeros(n)))
 
     # Menghitung T dan Q awal
@@ -62,38 +59,6 @@ def Qp_SCS(L,S,A,C):
     Q = qperqp * Qp
 
     return T,Q,Qp,Tp
-# def Qp_SCS(L,S,A,tr):
-#     Tc=0.01947*L**0.77*S**(-0.385) #waktu konsentrasi (menit)
-#     tp_aw= Tc/60 #waktu kelambatan (jam), Tc ubah dari menit ke jam 
-#     Tp= tr/2 + tp_aw #waktu naik  
-#     C = 2.08 #koefisien
-#     Qp=C*A/Tp/10
-#     tp=2.67 * Tp 
-#     tpertp = np.concatenate([
-#     np.arange(0, 1.6, 0.1),  # dari 0 hingga 1.6 dengan langkah 0.1
-#     np.arange(1.6, 3.1, 0.2), # dari 1.6 hingga 3 dengan langkah 0.2
-#     np.arange(3.5, 5.1, 0.5)  # dari 3.5 hingga 5 dengan langkah 0.5
-#     ])
-#     qperqp=np.array([0,0.015,0.075,0.16,0.28,0.43,0.6,0.77,0.89,0.97,1,
-#                      0.98,0.92,0.84,0.75,0.66,0.56,0.42,0.32,0.24,0.18,0.13,
-#                      0.098,0.075,0.036,0.018,0.009,0.004])
-#     # Tambahan nilai 0 sebanyak n
-#     n = 50
-#     qperqp = np.concatenate((qperqp, np.zeros(n)))
-
-#     # Menghitung T dan Q awal
-#     T = tpertp * Tp
-#     Q = qperqp * Qp
-
-#     # Memperpanjang tpertp dengan langkah 0.5
-#     tpertp_extension = np.arange(tpertp[-1] + 0.5, tpertp[-1] + 0.5 * (n + 1), 0.5)
-#     tpertp = np.concatenate((tpertp, tpertp_extension))
-
-#     # Memperbarui T dan Q dengan tpertp yang diperpanjang
-#     T = tpertp * Tp
-#     Q = qperqp * Qp
-
-#     return T,Q,Qp,Tp
 
 ##############################################################
 ######################## Snyder ##############################
