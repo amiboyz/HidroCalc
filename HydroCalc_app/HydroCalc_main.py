@@ -382,7 +382,7 @@ if submit_button:
                 ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
             ax1.set_xlabel('T (Hours)', fontsize=fsiz)
             ax1.set_ylabel('Q (m³/s)', fontsize=fsiz)
-            ax1.set_title('Synthetic Hydrograph', fontsize=fsiz)
+            ax1.set_title('Synthetic Hydrograph', fontsize=fsiz+5)
 
             # Memperbesar ukuran tick pada sumbu x dan y
             ax1.tick_params(axis='both', which='major', labelsize=fsiz)
@@ -391,7 +391,7 @@ if submit_button:
             # Membuat bar hujan efektif
             ax2 = ax1.twinx()
             ax2.bar(T, p_bar, alpha=0.3, label='Effective Rainfall (mm)', color='orange')
-            ax2.set_ylabel('Effective Rainfall / Infiltration (mm)', fontsize=fsiz)
+            ax2.set_ylabel('Eff Rainfall / Infiltration (mm)', fontsize=fsiz)
             ax2.set_ylim(0, 200)
             ax2.invert_yaxis()
 
@@ -477,7 +477,7 @@ if submit_button:
                 ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
             ax1.set_xlabel('T (Hours)', fontsize=fsiz)
             ax1.set_ylabel('Q (m³/s)', fontsize=fsiz)
-            ax1.set_title('Synthetic Hydrograph', fontsize=fsiz)
+            ax1.set_title('Synthetic Hydrograph', fontsize=fsiz+5)
 
             # Memperbesar ukuran tick pada sumbu x dan y
             ax1.tick_params(axis='both', which='major', labelsize=fsiz)
@@ -486,7 +486,7 @@ if submit_button:
             # Membuat bar hujan efektif
             ax2 = ax1.twinx()
             ax2.bar(T, p_bar, alpha=0.3, label='Effective Rainfall (mm)', color='orange')
-            ax2.set_ylabel('Effective Rainfall / Infiltration (mm)', fontsize=fsiz)
+            ax2.set_ylabel('Eff Rainfall / Infiltration (mm)', fontsize=fsiz)
             ax2.set_ylim(0, 200)
             ax2.invert_yaxis()
 
