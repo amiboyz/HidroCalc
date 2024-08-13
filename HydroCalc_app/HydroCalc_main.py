@@ -474,9 +474,9 @@ if submit_button:
                 ax1.plot(T3, Qtot3[:len(T3)], marker='o', label='ITB-1')
             if show_itb2:
                 ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
-            ax1.set_xlabel('T (Jam)', fontsize=fsiz)
-            ax1.set_ylabel('Q (m³/det)', fontsize=fsiz)
-            ax1.set_title('Hidrogaf Sintetik', fontsize=fsiz)
+            ax1.set_xlabel('T (Hours)', fontsize=fsiz)
+            ax1.set_ylabel('Q (m³/s)', fontsize=fsiz)
+            ax1.set_title('Synthetic Hydrograph', fontsize=fsiz)
 
             # Memperbesar ukuran tick pada sumbu x dan y
             ax1.tick_params(axis='both', which='major', labelsize=fsiz)
@@ -484,8 +484,8 @@ if submit_button:
 
             # Membuat bar hujan efektif
             ax2 = ax1.twinx()
-            ax2.bar(T, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
-            ax2.set_ylabel('Hujan Efektif / Infiltrasi (mm)', fontsize=fsiz)
+            ax2.bar(T, p_bar, alpha=0.3, label='Effective Rainfall (mm)', color='orange')
+            ax2.set_ylabel('Effective Rainfall / Infiltration (mm)', fontsize=fsiz)
             ax2.set_ylim(0, 200)
             ax2.invert_yaxis()
 
