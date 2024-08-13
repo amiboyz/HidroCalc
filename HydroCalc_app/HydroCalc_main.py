@@ -601,7 +601,7 @@ if submit_button:
         df_Q_T = df_Q_T[columns_order]
 
         # Menambah angka 0 di depan
-        df_Q_T = df_Q_T['Time (Jam ke-)']-1
+        df_Q_T['Time (Jam ke-)'] = df_Q_T['Time (Jam ke-)']-1
 
         # Menghilangkan angka terakhir
         #df_Q_T = df_Q_T.iloc[:-1]
