@@ -362,7 +362,7 @@ if submit_button:
             Q_peak4, t_peak4, V_total4, t_peak_V4,T4,Qtot4,V_cum4 =  calculate_Q_and_V(p,time_step_hours, Q_qp4, time_to_compute)     
             T=T4                                       
         # Membuat p_bar dengan menambahkan nol hingga panjangnya sama dengan T
-        fsiz = 40
+        fsiz = 30
         if Metode_infiltrasi == "SCS-CN" or Metode_infiltrasi == "Horton": 
             p_bar = np.concatenate((p, np.zeros((len(T) - len(p)))))
             Infiltrasi_bar = np.concatenate((Infiltrasi, np.zeros((len(T) - len(Infiltrasi)))))
