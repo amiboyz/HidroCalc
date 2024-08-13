@@ -382,7 +382,7 @@ if submit_button:
                 ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
             ax1.set_xlabel('T (Hours)', fontsize=fsiz)
             ax1.set_ylabel('Q (m³/s)', fontsize=fsiz)
-            ax1.set_title('Synthetic Hydrograph', fontsize=fsiz+5)
+            ax1.set_title('Synthetic Hydrograph', fontsize=fsiz+10)
 
             # Memperbesar ukuran tick pada sumbu x dan y
             ax1.tick_params(axis='both', which='major', labelsize=fsiz)
@@ -414,7 +414,7 @@ if submit_button:
             lines, labels = ax1.get_legend_handles_labels()
             lines2, labels2 = ax2.get_legend_handles_labels()
             lines3, labels3 = ax3.get_legend_handles_labels()
-            ax1.legend(lines + lines2 + lines3, labels + labels2 + labels3, loc='upper right')
+            ax1.legend(lines + lines2 + lines3, labels + labels2 + labels3, loc='upper right',fontsize=fsiz)
 
             plt.grid(True)
             plt.show()
@@ -454,7 +454,7 @@ if submit_button:
             lines, labels = ax1.get_legend_handles_labels()
             lines2, labels2 = ax2.get_legend_handles_labels()
             lines3, labels3 = ax3.get_legend_handles_labels()
-            ax1.legend(lines + lines2 + lines3, labels + labels2 + labels3, loc='upper right')
+            ax1.legend(lines + lines2 + lines3, labels + labels2 + labels3, loc='upper right',fontsize=fsiz)
             plt.grid(True)
             plt.show()
             fig2=fig
@@ -477,7 +477,7 @@ if submit_button:
                 ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
             ax1.set_xlabel('T (Hours)', fontsize=fsiz)
             ax1.set_ylabel('Q (m³/s)', fontsize=fsiz)
-            ax1.set_title('Synthetic Hydrograph', fontsize=fsiz+5)
+            ax1.set_title('Synthetic Hydrograph', fontsize=fsiz+10)
 
             # Memperbesar ukuran tick pada sumbu x dan y
             ax1.tick_params(axis='both', which='major', labelsize=fsiz)
@@ -498,7 +498,7 @@ if submit_button:
             # Menyatukan legend dari semua sumbu
             lines, labels = ax1.get_legend_handles_labels()
             lines2, labels2 = ax2.get_legend_handles_labels()
-            ax1.legend(lines + lines2 , labels + labels2 , loc='upper right')
+            ax1.legend(lines + lines2 , labels + labels2 , loc='upper right',fontsize=fsiz)
 
             plt.grid(True)
             plt.show()
