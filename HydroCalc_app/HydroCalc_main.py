@@ -318,17 +318,17 @@ if submit_button:
         p_hss=p
 
         # Ubah ukuran label sumbu dan tick axis
-        p.xaxis.axis_label_text_font_size = "14pt"
-        p.yaxis.axis_label_text_font_size = "14pt"
-        p.xaxis.major_label_text_font_size = "12pt"
-        p.yaxis.major_label_text_font_size = "12pt"
+        p.xaxis.axis_label_text_font_size = "15pt"
+        p.yaxis.axis_label_text_font_size = "15pt"
+        p.xaxis.major_label_text_font_size = "15pt"
+        p.yaxis.major_label_text_font_size = "15pt"
 
         # Ubah ukuran title
-        p.title.text_font_size = "15pt"
+        p.title.text_font_size = "20pt"
         p.title.align = "center"
 
         # Ubah ukuran teks di legend
-        p.legend.label_text_font_size = "12pt"
+        p.legend.label_text_font_size = "15pt"
 
         # Show the plot
         show(p)
