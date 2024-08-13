@@ -600,6 +600,12 @@ if submit_button:
         columns_order = ['Time (Jam ke-)'] + [col for col in df_Q_T.columns if col != 'Time (Jam ke-)']
         df_Q_T = df_Q_T[columns_order]
 
+        # Menambah angka 0 di depan
+        df_Q_T = pd.concat([pd.DataFrame([0], columns=['Time (Jam ke-)']), df_Q_T])
+        
+        # Menghilangkan angka terakhir
+        df_Q_T = df_Q_T.iloc[:-1]
+
         # Menampilkan tabel
         #print('Tabel Nilai T dan Q setiap metode')
         #print(df_Q_T)

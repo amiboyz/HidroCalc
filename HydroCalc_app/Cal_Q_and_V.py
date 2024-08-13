@@ -62,11 +62,11 @@ def calculate_Q_and_V(p,time_step_hours, Q_qp, time_to_compute):
     #plt.show()
     Q_peak = np.max(Qtot[:time_to_compute])
     max_index_Q = np.argmax(Qtot[:time_to_compute])
-    t_peak_Q = T[max_index_Q]
+    t_peak_Q = T[max_index_Q]-1
     # Menghitung nilai maksimum dari V_cum
     V_total = np.max(V_cum)
     max_index_V = np.argmax(V_cum[:time_to_compute])
-    t_peak_V = T[max_index_V]
+    t_peak_V = T[max_index_V]-1
     #print('Qpuncak', Q_peak,'m3/s')
     #print('t Qpuncak',t_peak_Q,'jam')
     #print('V puncak', V_total,'m3')
