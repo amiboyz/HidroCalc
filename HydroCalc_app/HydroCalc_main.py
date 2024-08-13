@@ -463,8 +463,7 @@ if submit_button:
             plt.figure(figsize=(12, 6))
 
             fig, ax1 = plt.subplots(figsize=(12, 6))
-            fsiz = 20
-
+            
             # Membuat HSS
             if show_scs:
                 ax1.plot(T1, Qtot1[:len(T1)], marker='o', label='SCS')
