@@ -19,11 +19,11 @@ from datetime import datetime
 # Fungsi untuk menjalankan analisis distribusi hujan dan infiltrasi berdasarkan metode yang dipilih
 
 # Mengatur judul dan deskripsi aplikasi
-st.title('Analisis Effective Rainfall dan Hidrograf Satuan Sintesis (HSS) dengan Modul HydroCalc')
+st.title('Analisis Hujan Efektif dan Hidrograf Satuan Sintesis (HSS) dengan Modul HydroCalc')
 
 #st.caption('by : [Haz](mailto:miftahhazmi@gmail.com)')
 
-st.write('Selamat datang di aplikasi berbasis web untuk perhitungan infiltrasi dan hidrograf satuan sintesis (HSS) menggunakan metode distribusi hujan PSA-007 dan ITB. Aplikasi ini dimaksudkan untuk membantu Anda dalam menganalisis Effective Rainfall dan menghasilkan hidrograf satuan sintesis.')
+st.write('Selamat datang di aplikasi berbasis web untuk perhitungan infiltrasi dan hidrograf satuan sintesis (HSS) menggunakan metode distribusi hujan PSA-007 dan ITB. Aplikasi ini dimaksudkan untuk membantu Anda dalam menganalisis hujan efektif dan menghasilkan hidrograf satuan sintesis.')
 
 st.write('### Metode Infiltrasi yang Tersedia:')
 st.write('- **SCS-CN**: Metode ini menggunakan parameter Curah Hujan Rencana dan Kurva Angka (Curve Number) untuk menghitung infiltrasi.')
@@ -37,26 +37,26 @@ st.write('- **ITB-2**: Metode ini juga merupakan metode hidrograf sintesis yang 
 
 st.write('Aplikasi ini masih dalam proses pengembangaan masukan dan saran silahkan hubungi: [Contact Us](mailto:miftahhazmi@gmail.com)')
 
-#st.subheader('Input Parameter Untuk Effective Rainfall', divider='blue')
+#st.subheader('Input Parameter Untuk Hujan Efektif', divider='blue')
 
 
 col1, col2,col3 = st.columns(3)
 
 with col1:
-    st.subheader('Input Metode Effective Rainfall', divider='green')
+    st.subheader('Input Metode Hujan Efektif', divider='green')
     # Menyediakan pilihan input untuk metode infiltrasi
-    Metode_infiltrasi = st.radio('Pilih Metode Infiltrasi:', ['SCS-CN', 'Horton', 'Effective Rainfall is known'])
+    Metode_infiltrasi = st.radio('Pilih Metode Infiltrasi:', ['SCS-CN', 'Horton', 'Hujan Efektif diketahui'])
 
     # Input untuk parameter-parameter berdasarkan pilihan metode infiltrasi
-    if Metode_infiltrasi == 'Effective Rainfall is known':
-        st.subheader('Input Nilai Effective Rainfall', divider='blue')
+    if Metode_infiltrasi == 'Hujan Efektif diketahui':
+        st.subheader('Input Nilai Hujan Efektif', divider='blue')
         # Input for Rainfall Data (R)
-        Re_input = st.text_area("Masukan Effective Rainfall (mm/jam), separated by commas", 
+        Re_input = st.text_area("Masukan Hujan Efektif (mm/jam), separated by commas", 
                             "55.4, 16.1, 11.7, 9.2, 7.2, 5.7")
         Re_input =np.array([float(x) for x in Re_input.split(',')])
         delta_jam_hujan = 1
     elif Metode_infiltrasi == 'SCS-CN' or 'Horton':
-        st.subheader('Input Parameter untuk Effective Rainfall', divider='blue')
+        st.subheader('Input Parameter untuk Hujan Efektif', divider='blue')
         P = st.number_input("Masukkan Hujan Rencana (mm):", value=132.9, format="%.3f")
         ARF = st.number_input("Masukkan Area Reduction Factor (ARF):", value=0.97, format="%.3f")
         if Metode_infiltrasi == 'SCS-CN':
@@ -138,7 +138,7 @@ JENIS_PROFESI = [
 
 # Membuat Form baru
 # with st.form(key="User_Form"):
-nama_user = st.text_input(label="Name")
+nama_user = st.text_input(label="Nama*")
 jenis_profesi = st.selectbox("Pilih Profesi*", options=JENIS_PROFESI, index=None)
 tanggal_akses = datetime.now()
 jam_akses = datetime.now().time()
@@ -195,7 +195,7 @@ if submit_button:
             st.write(dfreff)
             st.write('Grafik Infiltrasi Jam-jaman')
             st.bokeh_chart(fig2)
-        elif Metode_infiltrasi == 'Effective Rainfall is known':
+        elif Metode_infiltrasi == 'Hujan Efektif diketahui':
             Hujan_Efektif = Re_input
             x_values = list(range(1, len(Hujan_Efektif) + 1))
             # Creating a DataFrame for the table
@@ -205,7 +205,7 @@ if submit_button:
             })
 
             # Displaying the DataFrame as a table in Streamlit
-            st.write("Tabel Effective Rainfall Jam-Jaman")
+            st.write("Tabel Hujan Efektif Jam-Jaman")
             st.dataframe(df)
 
 
@@ -214,9 +214,9 @@ if submit_button:
             ax.bar(x_values, Hujan_Efektif, color='skyblue')
 
             # Adding labels and title
-            ax.set_xlabel('Jam Ke-')
+            ax.set_xlabel('Hours')
             ax.set_ylabel('Effective Rainfall (mm)')
-            ax.set_title('Grafik Effective Rainfall')
+            ax.set_title('Effective Rainfall Graph')
 
             # Displaying the bar chart in Streamlit
             st.pyplot(fig)
@@ -292,14 +292,14 @@ if submit_button:
         # df_Q_T_int = pd.DataFrame(data)          
  
         # Menampilkan tabel
-        print('Table of Tp and Qp Values for Each Method.')
+        print('Tabel Nilai Tp dan Qp setiap metode')
         print(Table_Tp_Qp)
 
         print('Tabel Nilai T dan Q setiap metode HSS yang telah Interpolasi per delta t')
         #print(df_Q_T_int)
 
         # Create a new plot with a title and axis labels
-        p = figure(title="Interpolated SUH", x_axis_label='T (Hours)', y_axis_label='Q (m3/s / mm)')
+        p = figure(title="Interpolated Unit Hydrograph", x_axis_label='T (Hours)', y_axis_label='Q (m3/s / mm)')
 
         # Add lines for each dataset
         if show_scs:
@@ -387,7 +387,7 @@ if submit_button:
             ax1.tick_params(axis='both', which='major', labelsize=fsiz)
             ax1.tick_params(axis='both', which='minor', labelsize=fsiz)
 
-            # Membuat bar Effective Rainfall
+            # Membuat bar hujan efektif
             ax2 = ax1.twinx()
             ax2.bar(T, p_bar, alpha=0.3, label='Effective Rainfall (mm)', color='orange')
             ax2.set_ylabel('Effective Rainfall / Infiltration (mm)', fontsize=fsiz)
@@ -430,21 +430,21 @@ if submit_button:
                 ax1.plot(T3[:-1], V_cum3[:-1], marker='o', label='ITB-1')
             if show_itb2:
                 ax1.plot(T4[:-1], V_cum4[:-1], marker='o', label='ITB-2')
-            ax1.set_xlabel('T (Hours)')
+            ax1.set_xlabel('T (Jam)')
             ax1.set_ylabel('Volume (m3)')
-            ax1.set_title('The relationship between V (volume), Q (flow or discharge)')
+            ax1.set_title('Hubungan antara V dan Q serta p')
 
-            # Membuat bar Effective Rainfall
+            # Membuat bar hujan efektif
             ax2 = ax1.twinx()
-            ax2.bar(T, p_bar, alpha=0.3, label='Effective Rainfall (mm)', color='orange')
-            ax2.set_ylabel('Effective Rainfall (mm)')
+            ax2.bar(T, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
+            ax2.set_ylabel('Hujan Efektif(mm)')
             ax2.set_ylim(0, 200)
             ax2.invert_yaxis()  # Membalikkan arah y-axis
             # Membuat bar infiltrasi
 
             ax3 = ax1.twinx()
-            ax3.bar(T, Infiltrasi_bar, alpha=0.3, label='Infiltration (mm)', color='r')
-            ax3.set_ylabel('Effective Rainfall (mm)')
+            ax3.bar(T, Infiltrasi_bar, alpha=0.3, label='Infiltrasi (mm)', color='r')
+            ax3.set_ylabel('Hujan Efektif(mm)')
             ax3.set_ylim(0, 200)
             ax3.invert_yaxis() 
 
@@ -457,7 +457,7 @@ if submit_button:
             plt.grid(True)
             plt.show()
             fig2=fig
-        elif Metode_infiltrasi == 'Effective Rainfall is known': 
+        elif Metode_infiltrasi == 'Hujan Efektif diketahui': 
             p_bar = np.concatenate((p, np.zeros((len(T) - len(p)))))
             
             plt.figure(figsize=(12, 6))
@@ -474,18 +474,18 @@ if submit_button:
                 ax1.plot(T3, Qtot3[:len(T3)], marker='o', label='ITB-1')
             if show_itb2:
                 ax1.plot(T4, Qtot4[:len(T4)], marker='o', label='ITB-2')
-            ax1.set_xlabel('T (Hours)', fontsize=fsiz)
-            ax1.set_ylabel('Q (m³/s)', fontsize=fsiz)
-            ax1.set_title('Synthetic Hydrograph', fontsize=fsiz)
+            ax1.set_xlabel('T (Jam)', fontsize=fsiz)
+            ax1.set_ylabel('Q (m³/det)', fontsize=fsiz)
+            ax1.set_title('Hidrogaf Sintetik', fontsize=fsiz)
 
             # Memperbesar ukuran tick pada sumbu x dan y
             ax1.tick_params(axis='both', which='major', labelsize=fsiz)
             ax1.tick_params(axis='both', which='minor', labelsize=fsiz)
 
-            # Membuat bar Effective Rainfall
+            # Membuat bar hujan efektif
             ax2 = ax1.twinx()
-            ax2.bar(T, p_bar, alpha=0.3, label='Effective Rainfall (mm)', color='orange')
-            ax2.set_ylabel('Effective Rainfall / Infiltrasi (mm)', fontsize=fsiz)
+            ax2.bar(T, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
+            ax2.set_ylabel('Hujan Efektif / Infiltrasi (mm)', fontsize=fsiz)
             ax2.set_ylim(0, 200)
             ax2.invert_yaxis()
 
@@ -520,10 +520,10 @@ if submit_button:
             ax1.set_ylabel('Volume (m3)')
             ax1.set_title('Hubungan antara V dan Q serta p')
 
-            # Membuat bar Effective Rainfall
+            # Membuat bar hujan efektif
             ax2 = ax1.twinx()
-            ax2.bar(T, p_bar, alpha=0.3, label='Effective Rainfall (mm)', color='orange')
-            ax2.set_ylabel('Effective Rainfall(mm)')
+            ax2.bar(T, p_bar, alpha=0.3, label='Hujan Efektif (mm)', color='orange')
+            ax2.set_ylabel('Hujan Efektif(mm)')
             ax2.set_ylim(0, 200)
             ax2.invert_yaxis()  # Membalikkan arah y-axis
 
@@ -619,7 +619,7 @@ if submit_button:
         st.write(Table_Tp_Qp)
         #st.write('Tabel Nilai T dan Q setiap metode HSS yang telah Interpolasi per delta t=1 Jam')
         #st.write(df_Q_T_int)
-        st.write('Grafik Hidrograf Sintetik dengan memasukan Effective Rainfall')
+        st.write('Grafik Hidrograf Sintetik dengan memasukan Hujan Efektif')
         st.pyplot(fig1)
         st.write('Tabel Nilai T peak dan Q peak')
         st.write(Table_Tp_Qp_p)
