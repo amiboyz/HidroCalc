@@ -317,6 +317,9 @@ if submit_button:
         p.legend.click_policy = 'hide'
         p_hss=p
 
+        # Customize the font of the legend title
+        p.legend.title_text_font_size = '15pt'  # Adjust the font size
+
         # Ubah ukuran label sumbu dan tick axis
         p.xaxis.axis_label_text_font_size = "15pt"
         p.yaxis.axis_label_text_font_size = "15pt"
