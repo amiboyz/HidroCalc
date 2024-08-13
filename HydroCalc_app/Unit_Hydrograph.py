@@ -84,7 +84,7 @@ def Qp_Snyder(L,Lc,A,tr,ct,cp):
     #print('Qp',Qp)
     #Qp=qp
     tpertp=np.arange(0.1,10,0.1)
-    lamda = (Qp*Tp*3600)/(1000*A)
+    lamda = (Qp*Tp*1000)/(1000*A)
     a=1.32*lamda**2+0.15*lamda+0.045
     qperqp=10**-(a*(1-tpertp)**2/tpertp)
     T=tpertp*Tp
