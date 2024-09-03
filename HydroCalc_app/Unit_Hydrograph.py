@@ -103,26 +103,20 @@ def Qp_SCS(L,S,A,tr):
 def Qp_Snyder(L,Lc,A,tr,ct,cp):
     n = 0.3
     tp= ct * (L/1000 * Lc/1000)**n
-    #print('tp',tp)
     tc = tp/5.5
-    #print('tc',tc)
     qp=275*cp/tp #debit maksimum limpasan [liter/det/km2]
-    #print('qp',qp)
     if tc >= tr:
         t__p=tp+0.25*(tr-tc)
         Tp=t__p+0.5*tr#(tr-tc)
     else:
         t__p=tp + 0.25*(tr-tc)
         Tp=t__p + 0.5*(tr-tc)#tr
-    #print('Tp',Tp)
     qp=275*cp/Tp #debit maksimum limpasan [liter/det/km2]
     Qp=qp*A/1000 #1 mm
-    #print('Qp',Qp)
-    #Qp=qp
     tpertp=np.arange(0.1,10,0.1)
     lamda = (Qp*Tp*1000)/(1000*A)
     a=1.32*lamda**2+0.15*lamda+0.045
-    qperqp=10**-(a*(1-tpertp)**2/tpertp)
+    qperqp=10**(-a*(1-tpertp)**2/tpertp)
     T=tpertp*Tp
     Q=qperqp*Qp
     T = np.insert(T,0,0)
@@ -142,7 +136,6 @@ def HSS_ITB_1(ct,tr,cp,L,Lc,A,Alpha):
     T = np.arange(1, Tb, 1)
     T = np.insert(T, math.floor(Tp), Tp)  # Menyisipkan Tp ke dalam array T
     tpertp = T/Tp
-    #Alpha = 1.5
     qperqp = np.exp(2-tpertp-1/tpertp)**(Alpha*cp)
     A_Hss_j=np.zeros_like(tpertp, dtype=float)
     # Perhitugan A HSS dengan integral
@@ -168,21 +161,15 @@ def HSS_ITB_1(ct,tr,cp,L,Lc,A,Alpha):
 ##############################################################
 
 def HSS_ITB_2(ct,tr,cp,L,A,Alpha,betha):
-    # Perhitungan waktu puncak
-    #n = 0.3
-    #metode nakayasu
     if L < 15:
          tl= ct * 0.201*(L/1000)**0.7
     else:
          tl= ct * (0.527+0.058*(L/1000))   
-    #tl= ct * (0.0394*(L/1000)+0.201*(L/1000)**0.5) 
     Tp = 1.6* tl # waktu puncak
     Tb = 50 * Tp  # Tb/Tp = 20 (ditetapkan)
     T = np.arange(1, Tb, 1)
     T = np.insert(T, math.floor(Tp), Tp)  # Menyisipkan Tp ke dalam array T
     tpertp = T/Tp
-    #Alpha = 2.5
-    #betha = 0.72
     qperqp=np.zeros_like(tpertp, dtype=float)   
     for i in range (len(tpertp)):
         if tpertp[i] <1:
