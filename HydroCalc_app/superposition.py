@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def calculate_Q_and_V(p,time_step_hours, Q_qp, time_to_compute):
+def superposition(p,time_step_hours, Q_qp, time_to_compute):
     # Memotong atau menambah elemen di array p sesuai dengan time_to_compute
     if len(p) >= time_to_compute:
         p = p[:time_to_compute]
