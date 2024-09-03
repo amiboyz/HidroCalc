@@ -113,7 +113,8 @@ def Qp_Snyder(L,Lc,A,tr,ct,cp):
         Tp=t__p + 0.5*(tr-tc)#tr
     qp=275*cp/Tp #debit maksimum limpasan [liter/det/km2]
     Qp=qp*A/1000 #1 mm
-    tpertp=np.arange(0.1,10,0.1)
+    t=np.arange(1,20,1)
+    tpertp=t/Tp
     lamda = (Qp*Tp)/(A)
     a=1.32*lamda**2+0.15*lamda+0.045
     qperqp=10**(-a*((1-tpertp)**2/tpertp))
