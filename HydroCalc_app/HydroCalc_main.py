@@ -11,7 +11,7 @@ from superposition import superposition
 from dist_hujan import coef_dist_hujan
 from infiltrasi_calc import infiltrasi_CN, infiltrasi_Horton
 from Unit_Hydrograph import Qp_SCS,Qp_Snyder,HSS_ITB_1,HSS_ITB_2
-from streamlit_gsheets import GSheetsConnection
+#from streamlit_gsheets import GSheetsConnection
 from datetime import datetime
 #
 #Tabel Input
