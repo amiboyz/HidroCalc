@@ -2,18 +2,18 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from bokeh.plotting import figure, show#, output_notebook
+from bokeh.plotting import figure, show #, output_notebook
 # from HidrocalcMod import (coef_dist_hujan,
 #                           infiltrasi_CN, infiltrasi_Horton, 
 #                           calculate_Q_and_V,
 #                           Qp_SCS,Qp_Snyder,HSS_ITB_1,HSS_ITB_2)
-from Cal_Q_and_V import calculate_Q_and_V
+from superposition import superposition
 from dist_hujan import coef_dist_hujan
 from infiltrasi_calc import infiltrasi_CN, infiltrasi_Horton
 from Unit_Hydrograph import Qp_SCS,Qp_Snyder,HSS_ITB_1,HSS_ITB_2
 from streamlit_gsheets import GSheetsConnection
 from datetime import datetime
-
+#
 #Tabel Input
 #output_notebook()
 # Fungsi untuk menjalankan analisis distribusi hujan dan infiltrasi berdasarkan metode yang dipilih
@@ -290,7 +290,7 @@ if submit_button:
         # if show_itb2:
         #     data['ITB 2 (m3/s / mm)'] = qi4 
         # df_Q_T_int = pd.DataFrame(data)          
- 
+    
         # Menampilkan tabel
         print('Tabel Nilai Tp dan Qp setiap metode')
         print(Table_Tp_Qp)
@@ -350,19 +350,19 @@ if submit_button:
         time_step_hours = delta_jam_hujan
         if show_scs:
             Q_qp1 = qi1
-            Q_peak1, t_peak1, V_total1, t_peak_V1,T1,Qtot1,V_cum1 =  calculate_Q_and_V(p,time_step_hours, Q_qp1, time_to_compute)
+            Q_peak1, t_peak1, V_total1, t_peak_V1,T1,Qtot1,V_cum1 =  superposition(p,time_step_hours, Q_qp1, time_to_compute)
             T=T1
         if show_snyder:
             Q_qp2 = qi2
-            Q_peak2, t_peak2, V_total2, t_peak_V2,T2,Qtot2,V_cum2 =  calculate_Q_and_V(p,time_step_hours, Q_qp2, time_to_compute)
+            Q_peak2, t_peak2, V_total2, t_peak_V2,T2,Qtot2,V_cum2 =  superposition(p,time_step_hours, Q_qp2, time_to_compute)
             T=T2
         if show_itb1:
             Q_qp3 = qi3
-            Q_peak3, t_peak3, V_total3, t_peak_V3,T3,Qtot3,V_cum3 =  calculate_Q_and_V(p,time_step_hours, Q_qp3, time_to_compute)
+            Q_peak3, t_peak3, V_total3, t_peak_V3,T3,Qtot3,V_cum3 =  superposition(p,time_step_hours, Q_qp3, time_to_compute)
             T=T3
         if show_itb2:
             Q_qp4 = qi4
-            Q_peak4, t_peak4, V_total4, t_peak_V4,T4,Qtot4,V_cum4 =  calculate_Q_and_V(p,time_step_hours, Q_qp4, time_to_compute)     
+            Q_peak4, t_peak4, V_total4, t_peak_V4,T4,Qtot4,V_cum4 =  superposition(p,time_step_hours, Q_qp4, time_to_compute)     
             T=T4                                       
         # Membuat p_bar dengan menambahkan nol hingga panjangnya sama dengan T
         fsiz = 25
