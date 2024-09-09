@@ -119,33 +119,33 @@ with col3:
     show_itb2 = st.checkbox('Tampilkan ITB 2', value=True)
 st.subheader('Calculation Form', divider='red')
 
-#Establishing a google Sheets connection
-conn = st.connection("gsheets", type=GSheetsConnection)
+# #Establishing a google Sheets connection
+# conn = st.connection("gsheets", type=GSheetsConnection)
 
-#Fetch existing vendor data
-existing_data = conn.read(worksheet="Data", usecols=list(range(5)), ttl=5)
-existing_data = existing_data.dropna(how="all")
+# #Fetch existing vendor data
+# existing_data = conn.read(worksheet="Data", usecols=list(range(5)), ttl=5)
+# existing_data = existing_data.dropna(how="all")
 
-#st.dataframe(existing_data) #manampilkan database  
-# List of profession
-JENIS_PROFESI = [
-    "Akademisi",
-    "Government",
-    "Profesional",
-    "Mahasiswa",
-    "Lainnya",
-]
+# #st.dataframe(existing_data) #manampilkan database  
+# # List of profession
+# JENIS_PROFESI = [
+#     "Akademisi",
+#     "Government",
+#     "Profesional",
+#     "Mahasiswa",
+#     "Lainnya",
+# ]
 
-# Membuat Form baru
-# with st.form(key="User_Form"):
-nama_user = st.text_input(label="Nama*")
-jenis_profesi = st.selectbox("Pilih Profesi*", options=JENIS_PROFESI, index=None)
-tanggal_akses = datetime.now()
-jam_akses = datetime.now().time()
-masukan = st.text_area(label="Masukan dan Saran Anda")
+# # Membuat Form baru
+# # with st.form(key="User_Form"):
+# nama_user = st.text_input(label="Nama*")
+# jenis_profesi = st.selectbox("Pilih Profesi*", options=JENIS_PROFESI, index=None)
+# tanggal_akses = datetime.now()
+# jam_akses = datetime.now().time()
+# masukan = st.text_area(label="Masukan dan Saran Anda")
 
-# Mark Mandatory field
-st.markdown("**required*")
+# # Mark Mandatory field
+# st.markdown("**required*")
 
 submit_button = st.button(label="Kalkulasi Infiltrasi dan HSS")
 
