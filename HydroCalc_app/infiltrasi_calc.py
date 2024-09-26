@@ -70,11 +70,11 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
     reff_kum = np.cumsum(reff_jam)
     
     reffkumtab = {
-        'Jam ke-': absis,
-        'Hujan Rencana ': Pjam_cum,
-        'Hujan Rencana (ARF)': Pkum,
-        'Infiltrasi': infiltrasi_kum,
-        'Hujan Efektif': reff_kum,
+        'Hours': absis,
+        'Planned Rainfall ': Pjam_cum,
+        'Planned Rainfall (ARF)': Pkum,
+        'Infiltration': infiltrasi_kum,
+        'Effective Rainfall': reff_kum,
     #    'Iab': Iab,
         #'Nilai CN': CN,s
         #'Nilai Impervious (%)': Im,
@@ -83,11 +83,11 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
 
         # Menyimpan hasil perhitungan dalam DataFrame
     refftab = {
-        'Jam ke-': absis,
-        'Hujan Rencana ': Pjam,
-        'Hujan Rencana (ARF)': Pjam_ARF,
-        'Infiltrasi': infiltrasi_jam,
-        'Hujan Efektif': reff_jam,
+        'Hours': absis,
+        'Planned Rainfall ': Pjam,
+        'Planned Rainfall (ARF)': Pjam_ARF,
+        'Infiltration': infiltrasi_jam,
+        'Effective Rainfall': reff_jam,
     #    'Iab': Iab_jam,
         #'Nilai CN': CN,
         #'Nilai Impervious (%)': Im,
@@ -99,8 +99,8 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
 
     # Plotting bars on the first plot
     #fig.vbar(x=absis - 0.25, top=Pkum, width=0.2, color="powderblue", legend_label="Hujan Rencana (ARF) [mm]")
-    fig.vbar(x=absis + 0.25, top=reff_kum, width=0.2, color="orange", legend_label="Hujan efektif [mm]")  # Slightly shift bars to the right
-    fig.vbar(x=absis, top=infiltrasi_kum, width=0.2, color="greenyellow", legend_label="Infiltrasi [mm]")  # Slightly shift bars to the right
+    fig.vbar(x=absis + 0.25, top=reff_kum, width=0.2, color="orange", legend_label="Effective Rainfall [mm]")  # Slightly shift bars to the right
+    fig.vbar(x=absis, top=infiltrasi_kum, width=0.2, color="greenyellow", legend_label="Infiltration [mm]")  # Slightly shift bars to the right
 
     # Adding text annotations
     #for i in range(len(reff_kum)):
@@ -109,8 +109,8 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
     #    fig.text(x=absis[i], y=infiltrasi_kum[i], text=[str(round(infiltrasi_kum[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
 
     # Set axis labels and title
-    fig.xaxis.axis_label = 'Jam Ke-'
-    fig.yaxis.axis_label = 'Hujan Efektif / Infiltrasi (mm)'
+    fig.xaxis.axis_label = 'Hours'
+    fig.yaxis.axis_label = 'Effective Rainfall / Infiltration (mm)'
 
     # Ubah ukuran label sumbu dan tick axis
     fig.xaxis.axis_label_text_font_size = "14pt"

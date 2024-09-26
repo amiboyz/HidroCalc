@@ -13,6 +13,13 @@ from infiltrasi_calc import infiltrasi_CN, infiltrasi_Horton
 from Unit_Hydrograph import Qp_SCS,Qp_Snyder,HSS_ITB_1,HSS_ITB_2
 from streamlit_gsheets import GSheetsConnection
 from datetime import datetime
+import streamlit as st
+
+# Tambahkan judul atau teks di sidebar
+st.sidebar.title("Links Kalkulasi Lainnya")
+
+# Tambahkan link ke beberapa website lain
+st.sidebar.write("[📈Analisis Frekuensi by Haz Anfrek](https://hazanfrek.streamlit.app/)")
 
 #Tabel Input
 #output_notebook()
