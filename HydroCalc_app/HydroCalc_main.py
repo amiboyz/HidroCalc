@@ -15,11 +15,7 @@ from streamlit_gsheets import GSheetsConnection
 from datetime import datetime
 import streamlit as st
 
-# Tambahkan judul atau teks di sidebar
-st.sidebar.title("Links Kalkulasi Lainnya")
 
-# Tambahkan link ke beberapa website lain
-st.sidebar.write("[📈Analisis Frekuensi by Haz Anfrek](https://hazanfrek.streamlit.app/)")
 
 #Tabel Input
 #output_notebook()
@@ -50,6 +46,11 @@ st.write('Aplikasi ini masih dalam proses pengembangaan masukan dan saran silahk
 col1, col2,col3 = st.columns(3)
 
 with col1:
+    # Tambahkan judul atau teks di sidebar
+    st.sidebar.title("Links Kalkulasi Anfrek Untuk Hujan Rencana")
+
+    # Tambahkan link ke beberapa website lain
+    st.sidebar.write("[📈Analisis Frekuensi by Haz Anfrek](https://hazanfrek.streamlit.app/)")
     st.subheader('Input Metode Hujan Efektif', divider='green')
     # Menyediakan pilihan input untuk metode infiltrasi
     Metode_infiltrasi = st.radio('Pilih Metode Infiltrasi:', ['SCS-CN', 'Horton', 'Hujan Efektif diketahui'])
