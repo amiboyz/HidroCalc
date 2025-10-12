@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
-from bokeh.plotting import figure, show, output_notebook
-from bokeh.models import Legend
+import matplotlib.pyplot as plt
 
 #output_notebook()
 # Fungsi untuk menghitung limpasan berdasarkan metode CN
@@ -94,81 +93,33 @@ def infiltrasi_CN(P, ARF, CN, Im, jumlah_data_hujan, dist_jam, T):
     }
     dfreff = pd.DataFrame(refftab)
     
-    # First plot
-    fig = figure(width=600, height=400, title="Grafik Hujan Jam-Jaman Kumulatif dengan P = {} mm/hari (Metode SCS-CN)".format(np.round(np.sum(P) / ARF, 3)))
+    # First plot using Matplotlib
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.bar(absis + 0.25, reff_kum, width=0.2, color="orange", label="Effective Rainfall [mm]")
+    ax.bar(absis, infiltrasi_kum, width=0.2, color="greenyellow", label="Infiltration [mm]")
+    ax.set_xlabel('Hours', fontsize=14)
+    ax.set_ylabel('Effective Rainfall / Infiltration (mm)', fontsize=14)
+    ax.set_title("Grafik Hujan Jam-Jaman Kumulatif dengan P = {} mm/hari (Metode SCS-CN)".format(np.round(np.sum(P) / ARF, 3)), fontsize=13)
+    ax.tick_params(axis='both', labelsize=12)
+    ax.legend(loc='upper left', fontsize=12)
+    fig.tight_layout()
 
-    # Plotting bars on the first plot
-    #fig.vbar(x=absis - 0.25, top=Pkum, width=0.2, color="powderblue", legend_label="Hujan Rencana (ARF) [mm]")
-    fig.vbar(x=absis + 0.25, top=reff_kum, width=0.2, color="orange", legend_label="Effective Rainfall [mm]")  # Slightly shift bars to the right
-    fig.vbar(x=absis, top=infiltrasi_kum, width=0.2, color="greenyellow", legend_label="Infiltration [mm]")  # Slightly shift bars to the right
+    # Second plot using Matplotlib
+    fig2, ax2 = plt.subplots(figsize=(10, 6))
+    ax2.bar(absis + 0.25, reff, width=0.2, color="orange", label="Hujan efektif [mm]")
+    ax2.bar(absis, infiltrasi_jam, width=0.2, color="greenyellow", label="Infiltrasi [mm]")
+    ax2.set_xlabel('Jam ke-', fontsize=14)
+    ax2.set_ylabel('Hujan Efektif / Infiltrasi (mm)', fontsize=14)
+    ax2.set_title("Grafik Hujan Jam-Jaman dengan P = {} mm/hari (Metode SCS-CN)".format(np.round(np.sum(P) / ARF, 3)), fontsize=13)
+    ax2.tick_params(axis='both', labelsize=12)
+    ax2.legend(loc='upper left', fontsize=12)
+    fig2.tight_layout()
 
-    # Adding text annotations
-    #for i in range(len(reff_kum)):
-    #    fig.text(x=absis[i] - 0.25, y=Pkum[i], text=[str(round(Pkum[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
-    #    fig.text(x=absis[i] + 0.25, y=reff_kum[i], text=[str(round(reff_kum[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
-    #    fig.text(x=absis[i], y=infiltrasi_kum[i], text=[str(round(infiltrasi_kum[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
-
-    # Set axis labels and title
-    fig.xaxis.axis_label = 'Hours'
-    fig.yaxis.axis_label = 'Effective Rainfall / Infiltration (mm)'
-
-    # Ubah ukuran label sumbu dan tick axis
-    fig.xaxis.axis_label_text_font_size = "14pt"
-    fig.yaxis.axis_label_text_font_size = "14pt"
-    fig.xaxis.major_label_text_font_size = "12pt"
-    fig.yaxis.major_label_text_font_size = "12pt"
-    
-    # Ubah ukuran title
-    fig.title.text_font_size = "11pt"
-
-    # Ubah ukuran teks di legend
-    fig.legend.label_text_font_size = "12pt"
-
-    # Second plot
-    fig2 = figure(width=600, height=400, title="Grafik Hujan Jam-Jaman dengan P = {} mm/hari (Metode SCS-CN)".format(np.round(np.sum(P) / ARF, 3)))
-    #fig2.vbar(x=absis - 0.25, top=Pjam_ARF, width=0.2, color="powderblue", legend_label="Hujan Rencana (ARF) [mm]")
-    fig2.vbar(x=absis + 0.25, top=reff, width=0.2, color="orange", legend_label="Hujan efektif [mm]")  # Slightly shift bars to the right
-    fig2.vbar(x=absis, top=infiltrasi_jam, width=0.2, color="greenyellow", legend_label="Infiltrasi [mm]")  # Slightly shift bars to the right
-
-    # Adding text annotations
-    #for i in range(len(reff_kum)):
-    #    fig2.text(x=absis[i] - 0.25, y=P[i], text=[str(round(Pkum[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
-    #    fig2.text(x=absis[i] + 0.25, y=reff[i], text=[str(round(reff[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
-    #    fig2.text(x=absis[i], y=infiltrasi_jam[i], text=[str(round(infiltrasi_jam[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
-
-    # Set axis labels and title
-    fig2.xaxis.axis_label = 'Jam ke-'
-    fig2.yaxis.axis_label = 'Hujan Efektif / Infiltrasi (mm)'
-
-    # Ubah ukuran label sumbu dan tick axis
-    fig2.xaxis.axis_label_text_font_size = "14pt"
-    fig2.yaxis.axis_label_text_font_size = "14pt"
-    fig2.xaxis.major_label_text_font_size = "12pt"
-    fig2.yaxis.major_label_text_font_size = "12pt"
-    
-    # Ubah ukuran title
-    fig2.title.text_font_size = "11pt"
-    fig2.title.align = "center"
-
-    # Ubah ukuran teks di legend
-    fig2.legend.label_text_font_size = "12pt"
-    
-    # Adding legends
-    fig.legend.location = "top_left"
-    fig.legend.click_policy = "hide"
-    fig2.legend.location = "top_left"
-    fig2.legend.click_policy = "hide" 
-    
-    
-
-    # Tampilkan tabel dan graph reffkumtab
+    # Tampilkan tabel
     print("Tabel Hujan Efektif Kumulatif (Metode SCS-CN)")
     print(dfreffkum)
-    show(fig)
-    # Tampilkan tabel dan graph reff
     print("Tabel Hujan Efektif Jam-jaman (Metode SCS-CN)")
     print(dfreff)
-    show(fig2)
     return  absis, Pjam, Pjam_ARF, infiltrasi_jam, reff_jam, dfreffkum, dfreff, fig, fig2, Iab
 
 def infiltrasi_Horton(P, ARF, k, f0, fc, jumlah_data_hujan, dist_jam, T):
@@ -224,53 +175,31 @@ def infiltrasi_Horton(P, ARF, k, f0, fc, jumlah_data_hujan, dist_jam, T):
     }
     dfreff = pd.DataFrame(refftab)
     
-    # First plot
-    fig = figure(width=600, height=400, title="Grafik Hujan Jam-Jaman Kumulatif dengan P = {} mm/hari (Metode Horton)".format(np.round(np.sum(P) / ARF, 3)))
+    # First plot using Matplotlib
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.bar(absis + 0.25, reff_kum, width=0.2, color="orange", label="Hujan efektif [mm]")
+    ax.bar(absis, infiltrasi_kum, width=0.2, color="greenyellow", label="Infiltrasi [mm]")
+    ax.set_xlabel('Jam Ke-', fontsize=14)
+    ax.set_ylabel('Curah Hujan (mm)', fontsize=14)
+    ax.set_title("Grafik Hujan Jam-Jaman Kumulatif dengan P = {} mm/hari (Metode Horton)".format(np.round(np.sum(P) / ARF, 3)), fontsize=13)
+    ax.tick_params(axis='both', labelsize=12)
+    ax.legend(loc='upper left', fontsize=12)
+    fig.tight_layout()
 
-    # Plotting bars on the first plot
-    #fig.vbar(x=absis - 0.25, top=Pkum, width=0.2, color="powderblue", legend_label="Hujan Rencana (ARF) [mm]")
-    fig.vbar(x=absis + 0.25, top=reff_kum, width=0.2, color="orange", legend_label="Hujan efektif [mm]")  # Slightly shift bars to the right
-    fig.vbar(x=absis, top=infiltrasi_kum, width=0.2, color="greenyellow", legend_label="Infiltrasi [mm]")  # Slightly shift bars to the right
+    # Second plot using Matplotlib
+    fig2, ax2 = plt.subplots(figsize=(10, 6))
+    ax2.bar(absis + 0.25, reff, width=0.2, color="orange", label="Hujan efektif [mm]")
+    ax2.bar(absis, infiltrasi_jam, width=0.2, color="greenyellow", label="Infiltrasi [mm]")
+    ax2.set_xlabel('Jam ke-', fontsize=14)
+    ax2.set_ylabel('Curah Hujan (mm)', fontsize=14)
+    ax2.set_title("Grafik Hujan Jam-Jaman dengan P = {} mm/hari (Metode Horton)".format(np.round(np.sum(P) / ARF, 3)), fontsize=13)
+    ax2.tick_params(axis='both', labelsize=12)
+    ax2.legend(loc='upper left', fontsize=12)
+    fig2.tight_layout()
 
-    # Adding text annotations
-    #for i in range(len(reff_kum)):
-    #    fig.text(x=absis[i] - 0.25, y=Pkum[i], text=[str(round(Pkum[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
-    #    fig.text(x=absis[i] + 0.25, y=reff_kum[i], text=[str(round(reff_kum[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
-    #    fig.text(x=absis[i], y=infiltrasi_kum[i], text=[str(round(infiltrasi_kum[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
-
-    # Set axis labels and title
-    fig.xaxis.axis_label = 'Jam Ke-'
-    fig.yaxis.axis_label = 'Curah Hujan (mm)'
-
-    # Second plot
-    fig2 = figure(width=600, height=400, title="Grafik Hujan Jam-Jaman dengan P = {} mm/hari (Metode Horton)".format(np.round(np.sum(P) / ARF, 3)))
-    #fig2.vbar(x=absis - 0.25, top=Pjam_ARF, width=0.2, color="powderblue", legend_label="Hujan Rencana (ARF) [mm]")
-    fig2.vbar(x=absis + 0.25, top=reff, width=0.2, color="orange", legend_label="Hujan efektif [mm]")  # Slightly shift bars to the right
-    fig2.vbar(x=absis, top=infiltrasi_jam, width=0.2, color="greenyellow", legend_label="Infiltrasi [mm]")  # Slightly shift bars to the right
-
-    # Adding text annotations
-    #for i in range(len(reff_kum)):
-    #    fig2.text(x=absis[i] - 0.25, y=P[i], text=[str(round(Pkum[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
-    #    fig2.text(x=absis[i] + 0.25, y=reff[i], text=[str(round(reff[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
-    #    fig2.text(x=absis[i], y=infiltrasi_jam[i], text=[str(round(infiltrasi_jam[i], 1))], text_align='center', text_baseline='bottom',text_font_size="8pt")
-
-    # Set axis labels and title
-    fig2.xaxis.axis_label = 'Jam ke-'
-    fig2.yaxis.axis_label = 'Curah Hujan (mm)'
-
-    # Adding legends
-    fig.legend.location = "top_left"
-    fig.legend.click_policy = "hide"
-    fig2.legend.location = "top_left"
-    fig2.legend.click_policy = "hide" 
-
-    # Tampilkan tabel dan graph reffkumtab
+    # Tampilkan tabel
     print("Tabel Hujan Efektif Kumulatif (Metode Horton)")
     print(dfreffkum)
-    show(fig)
-    # Tampilkan tabel dan graph reff
     print("Tabel Hujan Efektif Jam-jaman (Metode Horton)")
     print(dfreff)
-    show(fig2)
     return  absis, Pjam, Pjam_ARF, infiltrasi_jam, reff_jam, dfreffkum, dfreff, fig, fig2
-

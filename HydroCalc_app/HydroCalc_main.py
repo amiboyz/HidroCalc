@@ -2,7 +2,6 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from bokeh.plotting import figure, show#, output_notebook
 # from HidrocalcMod import (coef_dist_hujan,
 #                           infiltrasi_CN, infiltrasi_Horton, 
 #                           calculate_Q_and_V,
@@ -195,14 +194,14 @@ if submit_button:
             # Menampilkan hasil analisis
             st.subheader('Hasil Analisis Infiltrasi')
             #st.write(dfreffkum)
-            #st.bokeh_chart(fig)
+            #st.pyplot(fig)
             if Metode_infiltrasi == "SCS-CN":
                 Initial_abstraction = np.max(np.round(Iab,3))
                 st.write('Nilai Initial Abstraction adalah', Initial_abstraction,' mm')        
             st.write('Tabel Hasil Analisis Infiltrasi Jam-Jaman')
             st.write(dfreff)
             st.write('Grafik Infiltrasi Jam-jaman')
-            st.bokeh_chart(fig2)
+            st.pyplot(fig2)
         elif Metode_infiltrasi == 'Hujan Efektif diketahui':
             Hujan_Efektif = Re_input
             x_values = list(range(1, len(Hujan_Efektif) + 1))
@@ -306,43 +305,26 @@ if submit_button:
         print('Tabel Nilai T dan Q setiap metode HSS yang telah Interpolasi per delta t')
         #print(df_Q_T_int)
 
-        # Create a new plot with a title and axis labels
-        p = figure(title="Interpolated Unit Hydrograph", x_axis_label='T (Hours)', y_axis_label='Q (m3/s / mm)')
-
-        # Add lines for each dataset
+        # Create a new plot with Matplotlib
+        fig_hss, ax_hss = plt.subplots(figsize=(12, 6))
         if show_scs:
-            line1 = p.line(ti, qi1, legend_label='SCS', line_width=2, color='blue')
+            ax_hss.plot(ti1, qi1, label='SCS', linewidth=2, color='blue')
         if show_snyder:
-            line2 = p.line(ti, qi2, legend_label='Snyder', line_width=2, color='green')
+            ax_hss.plot(ti2, qi2, label='Snyder', linewidth=2, color='green')
         if show_itb1:
-            line3 = p.line(ti, qi3, legend_label='ITB 1', line_width=2, color='red')
+            ax_hss.plot(ti3, qi3, label='ITB 1', linewidth=2, color='red')
         if show_itb2:
-            line4 = p.line(ti, qi4, legend_label='ITB 2', line_width=2, color='orange')
-
-        # Customize the legend
-        p.legend.title = 'Methods'
-        p.legend.location = 'top_right'
-        p.legend.click_policy = 'hide'
-        p_hss=p
-
-        # Customize the font of the legend title
-        p.legend.title_text_font_size = '15pt'  # Adjust the font size
-
-        # Ubah ukuran label sumbu dan tick axis
-        p.xaxis.axis_label_text_font_size = "15pt"
-        p.yaxis.axis_label_text_font_size = "15pt"
-        p.xaxis.major_label_text_font_size = "15pt"
-        p.yaxis.major_label_text_font_size = "15pt"
-
-        # Ubah ukuran title
-        p.title.text_font_size = "20pt"
-        p.title.align = "center"
-
-        # Ubah ukuran teks di legend
-        p.legend.label_text_font_size = "15pt"
-
-        # Show the plot
-        show(p)
+            ax_hss.plot(ti4, qi4, label='ITB 2', linewidth=2, color='orange')
+        ax_hss.set_title("Interpolated Unit Hydrograph", fontsize=20)
+        ax_hss.set_xlabel('T (Hours)', fontsize=15)
+        ax_hss.set_ylabel('Q (m3/s / mm)', fontsize=15)
+        ax_hss.tick_params(axis='both', labelsize=15)
+        legend = ax_hss.legend(title='Methods', loc='upper right', fontsize=15)
+        if legend is not None:
+            legend.set_title('Methods')
+            legend.get_title().set_fontsize(15)
+        fig_hss.tight_layout()
+        p_hss = fig_hss
 
         ##############################
         #Kalkulasi HSS
@@ -624,9 +606,9 @@ if submit_button:
         # Menampilkan hasil Analisis di Streamlit
         st.subheader('Hasil Analisis HSS')
         #st.write(dfreffkum)
-        #st.bokeh_chart(fig)
+        #st.pyplot(fig)
         st.write('Grafik Hidrograf Satuan Sintetik untuk Setiap Metode')
-        st.bokeh_chart(p_hss)
+        st.pyplot(p_hss)
         st.write('Tabel Nilai Tp dan Qp setiap metode')
         st.write(Table_Tp_Qp)
         #st.write('Tabel Nilai T dan Q setiap metode HSS yang telah Interpolasi per delta t=1 Jam')
