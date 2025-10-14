@@ -21,7 +21,7 @@ import streamlit as st
 # Fungsi untuk menjalankan analisis distribusi hujan dan infiltrasi berdasarkan metode yang dipilih
 
 # Mengatur judul dan deskripsi aplikasi
-st.title('Analisis Hujan Efektif dan Hidrograf Satuan Sintesis (HSS) dengan Modul HydroCalc')
+st.title('Analisis Hujan Efektif dan Hidrograf Satuan Sintesis (HSS)')
 st.caption('by : Haz🌊')
 #st.caption('by : [Haz](mailto:miftahhazmi@gmail.com)')
 
