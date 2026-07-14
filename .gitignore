@@ -2,3 +2,46 @@ HydroCalc_app/.DS_Store
 *.pyc
 HydroCalc_app/HidrocalcMod/.DS_Store
 .DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Environment
+.env
+*.env.local
+
+# Node
+node_modules/
+.next/
+out/
+npm-debug.log*
+
+# Docker volumes
+postgres_data/
+
+# IDE
+.vscode/    
+.idea/
+*.swp
+
+# ==========================================
+# macOS System Files
+# ==========================================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Menolak semua file metadata AppleDouble (._xxx)
+._*
+
+# Folder sistem bawaan macOS lainnya
+.Spotlight-V100
+.Trashes
+Icon\r
+
+.streamlit/secrets.toml
+

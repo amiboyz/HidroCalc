@@ -1,1 +1,14 @@
+
+# ==========================================
+# SECRET FILES
+# ==========================================
+
+# Local Secrets
 .streamlit/secrets.toml
+secrets.toml
+
+# Environment Variables
+.env
+.env.*
+
+.venv
